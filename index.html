@@ -573,13 +573,23 @@
     50%{box-shadow:0 0 0 6px rgba(79,142,247,.08),0 0 12px rgba(79,142,247,.2)}
   }
   .tl-yr {
-    font-size: .72rem; font-weight: 700; color: var(--blue);
+    font-size: .72rem; font-weight: 700; color: var(--blue-lt);
     letter-spacing: .07em; text-transform: uppercase; margin-bottom: 3px;
   }
   .tl-ti {
     font-family: var(--fh); font-size: .94rem; font-weight: 700;
     color: var(--t1); margin-bottom: 3px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   }
+  .tl-cs {
+    font-family: var(--fb); font-size: .68rem; font-weight: 600;
+    color: var(--t3); text-decoration: none;
+    background: rgba(255,255,255,.05); border: 1px solid var(--bd);
+    padding: 1px 7px; border-radius: 4px;
+    letter-spacing: .02em; white-space: nowrap;
+    transition: all .2s;
+  }
+  .tl-cs:hover { color: var(--amber); border-color: rgba(255,189,89,.3); background: rgba(255,189,89,.07); }
   .tl-de { color: var(--t3); font-size: .83rem; line-height: 1.55; }
 
   /* Founder card */
@@ -1106,39 +1116,49 @@
             <div class="tl-de">Ajay D'Souza adopts WordPress as one of its earliest users.</div>
           </div>
           <div class="tl-item">
-            <div class="tl-yr">Sep 2008</div>
-            <div class="tl-ti">Auto Close</div>
+            <div class="tl-yr">Aug 2008</div>
+            <div class="tl-ti">Auto Close <a href="https://plugins.trac.wordpress.org/changeset/59612" target="_blank" rel="noopener" class="tl-cs">r59612 ↗</a></div>
             <div class="tl-de">First plugin published — automatically closes comments and trackbacks on older posts.</div>
           </div>
           <div class="tl-item">
+            <div class="tl-yr">Sep 2008</div>
+            <div class="tl-ti">Top 10 — Popular Posts <a href="https://plugins.trac.wordpress.org/changeset/65307" target="_blank" rel="noopener" class="tl-cs">r65307 ↗</a></div>
+            <div class="tl-de">Tracks page views and displays the most popular posts on any WordPress site.</div>
+          </div>
+          <div class="tl-item">
             <div class="tl-yr">Jan 2009</div>
-            <div class="tl-ti">Contextual Related Posts</div>
+            <div class="tl-ti">Contextual Related Posts <a href="https://plugins.trac.wordpress.org/changeset/87744" target="_blank" rel="noopener" class="tl-cs">r87744 ↗</a></div>
             <div class="tl-de">The flagship plugin launches on WordPress.org. Now 16+ years old and still actively maintained.</div>
           </div>
           <div class="tl-item">
             <div class="tl-yr">Jan 2009</div>
-            <div class="tl-ti">Top 10 — Popular Posts</div>
-            <div class="tl-de">Tracks page views and displays the most popular posts on any WordPress site.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-yr">Feb 2009</div>
-            <div class="tl-ti">Followed Posts</div>
+            <div class="tl-ti">Followed Posts <a href="https://plugins.trac.wordpress.org/changeset/87746" target="_blank" rel="noopener" class="tl-cs">r87746 ↗</a></div>
             <div class="tl-de">Shows visitors what other users have recently viewed — social proof for content discovery.</div>
           </div>
           <div class="tl-item">
             <div class="tl-yr">Mar 2009</div>
-            <div class="tl-ti">Better Search</div>
+            <div class="tl-ti">Better Search <a href="https://plugins.trac.wordpress.org/changeset/102357" target="_blank" rel="noopener" class="tl-cs">r102357 ↗</a></div>
             <div class="tl-de">Replaces WordPress's default search with relevance-sorted, contextual results.</div>
           </div>
           <div class="tl-item">
-            <div class="tl-yr">Apr 2012</div>
-            <div class="tl-ti">WebberZone Snippetz</div>
+            <div class="tl-yr">Mar 2012</div>
+            <div class="tl-ti">WebberZone Snippetz <a href="https://plugins.trac.wordpress.org/changeset/523267" target="_blank" rel="noopener" class="tl-cs">r523267 ↗</a></div>
             <div class="tl-de">Manage custom HTML, CSS, and JS snippets across headers, footers, and content areas.</div>
           </div>
           <div class="tl-item">
             <div class="tl-yr">May 2015</div>
-            <div class="tl-ti">Knowledge Base</div>
+            <div class="tl-ti">Knowledge Base <a href="https://plugins.trac.wordpress.org/changeset/1163710" target="_blank" rel="noopener" class="tl-cs">r1163710 ↗</a></div>
             <div class="tl-de">The easiest way to create a fully-featured FAQ or documentation section in WordPress.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-yr">May 2020</div>
+            <div class="tl-ti">Popular Authors <a href="https://plugins.trac.wordpress.org/changeset/2312686" target="_blank" rel="noopener" class="tl-cs">r2312686 ↗</a></div>
+            <div class="tl-de">An add-on for Top 10 ranking authors by total view counts via widget or shortcode.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-yr">Mar 2026</div>
+            <div class="tl-ti">Link Warnings <a href="https://plugins.trac.wordpress.org/changeset/3476110" target="_blank" rel="noopener" class="tl-cs">r3476110 ↗</a></div>
+            <div class="tl-de">WCAG-compliant warnings for external links and new-window links — the newest addition.</div>
           </div>
           <div class="tl-item">
             <div class="tl-yr">Today</div>
