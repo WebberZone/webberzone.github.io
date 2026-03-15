@@ -6,661 +6,1126 @@
   <meta name="description" content="WebberZone on GitHub — open-source WordPress plugins for user retention and engagement by Ajay D'Souza.">
   <meta property="og:title" content="WebberZone on GitHub">
   <meta property="og:description" content="Open-source WordPress plugins for related posts, popular posts, search, knowledge base & more. Free and actively maintained.">
+  <meta property="og:image" content="WebberZone Logo.png">
   <title>WebberZone on GitHub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ══════════════════════════════════════
+     RESET & TOKENS
+  ══════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --navy:      #0b0f1e;
-      --navy-2:    #111827;
-      --navy-3:    #1a2236;
-      --navy-4:    #1e2a42;
-      --blue:      #4f8ef7;
-      --blue-2:    #3b74e8;
-      --amber:     #f59e0b;
-      --amber-2:   #fbbf24;
-      --text-1:    #f0f4ff;
-      --text-2:    #a8b8d8;
-      --text-3:    #6b7fa3;
-      --border:    rgba(255,255,255,0.07);
-      --card-bg:   rgba(255,255,255,0.035);
-      --radius:    14px;
-      --fh:        'Syne', sans-serif;
-      --fb:        'DM Sans', sans-serif;
-    }
+  :root {
+    --bg:        #080c18;
+    --bg-2:      #0d1120;
+    --bg-3:      #111827;
+    --bg-4:      #161e30;
+    --blue:      #4f8ef7;
+    --blue-dim:  #3b74e8;
+    --blue-glow: rgba(79,142,247,.22);
+    --amber:     #f59e0b;
+    --amber-2:   #fbbf24;
+    --teal:      #2dd4bf;
+    --purple:    #a78bfa;
+    --rose:      #fb7185;
+    --green:     #4ade80;
+    --slate:     #94a3b8;
+    --t1:        #eef2ff;
+    --t2:        #9fb3d8;
+    --t3:        #556887;
+    --bd:        rgba(255,255,255,.065);
+    --bd-2:      rgba(255,255,255,.10);
+    --card:      rgba(255,255,255,.028);
+    --r:         14px;
+    --fh:        'Syne', sans-serif;
+    --fb:        'DM Sans', sans-serif;
+  }
 
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--navy);
-      color: var(--text-1);
-      font-family: var(--fb);
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: var(--navy-4); border-radius: 3px; }
-    ::selection { background: rgba(79,142,247,0.3); color: #fff; }
+  html { scroll-behavior: smooth; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 64px;
-      background: rgba(11,15,30,0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      transition: background .3s, box-shadow .3s;
-    }
-    nav.scrolled { background: rgba(11,15,30,0.97); box-shadow: 0 1px 24px rgba(0,0,0,.5); }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 34px; width: auto; }
-    .nav-logo span { font-family: var(--fh); font-size: 1.1rem; font-weight: 700; color: var(--text-1); letter-spacing: -.02em; }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--text-2); text-decoration: none; font-size: .875rem; font-weight: 500; transition: color .2s; }
-    .nav-links a:hover { color: var(--text-1); }
-    .btn-nav {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--blue); color: #fff !important;
-      padding: 7px 18px; border-radius: 8px;
-      font-size: .85rem !important; font-weight: 600 !important;
-      transition: background .2s, transform .15s, box-shadow .2s !important;
-    }
-    .btn-nav:hover { background: var(--blue-2) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(79,142,247,.35) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-1); border-radius: 2px; transition: all .3s; }
+  body {
+    background: var(--bg);
+    color: var(--t1);
+    font-family: var(--fb);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 120px 40px 80px; overflow: hidden;
-    }
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(80px); opacity: .5;
-      pointer-events: none; animation: drift 14s ease-in-out infinite;
-    }
-    .orb-1 { width: 560px; height: 560px; top: -120px; left: -80px; background: radial-gradient(circle, rgba(79,142,247,.45), transparent 70%); }
-    .orb-2 { width: 480px; height: 480px; bottom: -80px; right: -60px; background: radial-gradient(circle, rgba(79,142,247,.3), transparent 70%); animation-delay: -5s; }
-    .orb-3 { width: 360px; height: 360px; top: 45%; left: 50%; transform: translate(-50%,-50%); background: radial-gradient(circle, rgba(245,158,11,.12), transparent 70%); animation-delay: -9s; }
-    @keyframes drift {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33%      { transform: translate(28px,-18px) scale(1.04); }
-      66%      { transform: translate(-18px,14px) scale(.97); }
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
-      background-size: 52px 52px; pointer-events: none;
-    }
-    .hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 180px;
-      background: linear-gradient(transparent, var(--navy)); pointer-events: none;
-    }
-    .hero-inner { position: relative; max-width: 840px; text-align: center; z-index: 1; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,.05); border: 1px solid var(--border);
-      color: var(--text-2); font-size: .78rem; font-weight: 500;
-      letter-spacing: .05em; padding: 6px 16px; border-radius: 50px;
-      margin-bottom: 28px; animation: fadeUp .7s ease both;
-    }
-    .hero-badge svg { color: var(--blue); }
-    .hero h1 {
-      font-family: var(--fh);
-      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-      font-weight: 800; line-height: 1.06; letter-spacing: -.04em;
-      margin-bottom: 22px; animation: fadeUp .7s .1s ease both;
-    }
-    .grad {
-      background: linear-gradient(135deg, var(--blue) 0%, var(--amber) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: clamp(.95rem, 2vw, 1.15rem); color: var(--text-2);
-      max-width: 520px; margin: 0 auto 36px; line-height: 1.75;
-      animation: fadeUp .7s .18s ease both;
-    }
-    .hero-ctas {
-      display: flex; align-items: center; justify-content: center;
-      gap: 14px; flex-wrap: wrap; animation: fadeUp .7s .26s ease both;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, var(--blue), var(--blue-2));
-      color: #fff; text-decoration: none; padding: 13px 26px;
-      border-radius: 10px; font-weight: 600; font-size: .92rem;
-      transition: all .25s; box-shadow: 0 4px 20px rgba(79,142,247,.35);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,142,247,.5); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--text-1); text-decoration: none;
-      padding: 12px 26px; border-radius: 10px; font-weight: 600;
-      font-size: .92rem; border: 1px solid var(--border); transition: all .25s;
-    }
-    .btn-ghost:hover { background: var(--card-bg); border-color: rgba(255,255,255,.15); transform: translateY(-2px); }
+  /* noise overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: .025;
+    mix-blend-mode: overlay;
+  }
 
-    /* floating chips */
-    .chips { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-    .chip {
-      position: absolute; background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07); padding: 5px 13px;
-      border-radius: 50px; font-size: .73rem; color: var(--text-3);
-      white-space: nowrap; backdrop-filter: blur(8px);
-      animation: floatChip 8s ease-in-out infinite;
-    }
-    .chip:nth-child(1) { top: 20%; left: 4%; }
-    .chip:nth-child(2) { top: 30%; right: 4%; animation-delay: 2s; animation-duration: 10s; }
-    .chip:nth-child(3) { top: 66%; left: 3%; animation-delay: 1s; animation-duration: 9s; }
-    .chip:nth-child(4) { top: 76%; right: 5%; animation-delay: 3s; animation-duration: 7s; }
-    @keyframes floatChip { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 3px; }
+  ::selection { background: rgba(79,142,247,.28); color: #fff; }
 
-    .hero-scroll {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 1;
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
-      color: var(--text-3); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
-      animation: fadeIn 1s 1s ease both;
-    }
-    .scroll-line { width: 1px; height: 36px; background: linear-gradient(var(--blue), transparent); animation: scrollPulse 2s ease infinite; }
-    @keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+  /* ══════════════════════════════════════
+     NAV
+  ══════════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 44px; height: 64px;
+    background: rgba(8,12,24,.75);
+    backdrop-filter: blur(24px) saturate(160%);
+    border-bottom: 1px solid var(--bd);
+    transition: background .35s, box-shadow .35s;
+  }
+  nav.scrolled {
+    background: rgba(8,12,24,.96);
+    box-shadow: 0 1px 32px rgba(0,0,0,.6);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; flex-shrink: 0;
+  }
+  .nav-logo img { height: 32px; width: auto; }
+  .nav-wordmark {
+    font-family: var(--fh); font-size: 1.05rem; font-weight: 700;
+    color: var(--t1); letter-spacing: -.025em;
+  }
+  .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+  .nav-links a {
+    color: var(--t2); text-decoration: none; font-size: .855rem;
+    font-weight: 500; letter-spacing: .01em;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 1px; background: var(--blue);
+    transition: width .25s;
+  }
+  .nav-links a:hover { color: var(--t1); }
+  .nav-links a:hover::after { width: 100%; }
+  .btn-gh {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--t1); color: var(--bg) !important;
+    padding: 7px 16px; border-radius: 8px;
+    font-size: .84rem !important; font-weight: 700 !important;
+    transition: background .2s, transform .15s, box-shadow .2s !important;
+    letter-spacing: -.01em !important;
+  }
+  .btn-gh::after { display: none !important; }
+  .btn-gh:hover {
+    background: #fff !important; color: var(--bg) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(255,255,255,.15) !important;
+  }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--t1); border-radius: 2px;
+    transition: all .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 40px 100px; overflow: hidden;
+  }
 
-    /* ── SHARED SECTION ── */
-    section { padding: 90px 40px; }
-    .container { max-width: 1160px; margin: 0 auto; }
-    .section-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--blue); font-size: .77rem; font-weight: 600;
-      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
-    }
-    .section-label::before { content:''; display:inline-block; width:18px; height:1px; background:var(--blue); }
-    .section-title {
-      font-family: var(--fh); font-size: clamp(1.9rem, 4vw, 2.8rem);
-      font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 14px;
-    }
-    .section-desc { color: var(--text-2); font-size: 1rem; max-width: 540px; line-height: 1.75; }
+  /* dot grid */
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 38px 38px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
 
-    /* ── STATS ── */
-    .stats { background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 40px; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; max-width: 1000px; margin: 0 auto; }
-    .stat-card { padding: 36px 28px; text-align: center; position: relative; }
-    .stat-card + .stat-card::before { content:''; position:absolute; left:0; top:20%; bottom:20%; width:1px; background:var(--border); }
-    .stat-icon { font-size: 1.5rem; display: block; margin-bottom: 10px; }
-    .stat-value {
-      font-family: var(--fh); font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1;
-      background: linear-gradient(135deg, var(--text-1), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 6px;
-    }
-    .stat-value.g-amber { background: linear-gradient(135deg, var(--amber-2), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .stat-label { color: var(--text-3); font-size: .83rem; font-weight: 500; letter-spacing: .02em; }
+  /* gradient orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(90px); pointer-events: none;
+    animation: orbDrift 16s ease-in-out infinite;
+  }
+  .orb-1 { width: 640px; height: 640px; top: -160px; left: -120px; background: rgba(79,142,247,.28); }
+  .orb-2 { width: 520px; height: 520px; bottom: -100px; right: -80px; background: rgba(79,142,247,.18); animation-delay: -6s; }
+  .orb-3 { width: 380px; height: 380px; top: 38%; left: 42%; background: rgba(245,158,11,.09); animation-delay: -11s; animation-duration: 20s; }
 
-    /* ── REPOS ── */
-    .repos { background: var(--navy); }
-    .repos-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 50px; flex-wrap: wrap; gap: 20px; }
-    .repos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 18px; }
+  @keyframes orbDrift {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%      { transform: translate(32px,-22px) scale(1.04); }
+    66%      { transform: translate(-18px,16px) scale(.97); }
+  }
 
-    .repo-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 26px;
-      position: relative; overflow: hidden;
-      transition: all .3s cubic-bezier(.22,1,.36,1);
+  /* vignette bottom */
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 220px;
+    background: linear-gradient(transparent, var(--bg));
+    pointer-events: none;
+  }
+
+  /* canvas stars */
+  #starCanvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; opacity: .5;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 860px; text-align: center;
+  }
+
+  /* badge */
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 6px 18px; border-radius: 50px;
+    background: rgba(79,142,247,.08);
+    border: 1px solid rgba(79,142,247,.22);
+    color: #7eb3ff; font-size: .78rem; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+    margin-bottom: 30px;
+    animation: fadeUp .7s ease both;
+    position: relative; overflow: hidden;
+  }
+  .hero-badge::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(79,142,247,.12), transparent);
+    animation: shimmer 3s ease infinite;
+  }
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue);
+    animation: blink 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes blink { 0%,100%{opacity:1;box-shadow:0 0 4px var(--blue)} 50%{opacity:.4;box-shadow:none} }
+
+  .hero h1 {
+    font-family: var(--fh);
+    font-size: clamp(2.7rem, 5.8vw, 5rem);
+    font-weight: 800; line-height: 1.04; letter-spacing: -.045em;
+    margin-bottom: 24px;
+    animation: fadeUp .75s .08s ease both;
+  }
+  .hero h1 .line-plain { display: block; color: var(--t1); }
+  .grad {
+    display: inline-block;
+    background: linear-gradient(110deg, var(--blue) 0%, #81b4ff 45%, var(--amber) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradShift 5s ease infinite;
+  }
+  @keyframes gradShift {
+    0%,100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  .hero-sub {
+    font-size: clamp(.95rem, 1.8vw, 1.15rem);
+    color: var(--t2); max-width: 520px; margin: 0 auto 40px;
+    line-height: 1.8; font-weight: 400;
+    animation: fadeUp .75s .17s ease both;
+  }
+
+  .hero-ctas {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; flex-wrap: wrap;
+    animation: fadeUp .75s .26s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue); color: #fff;
+    text-decoration: none; padding: 13px 26px;
+    border-radius: 10px; font-weight: 600; font-size: .92rem;
+    transition: all .25s cubic-bezier(.22,1,.36,1);
+    box-shadow: 0 0 0 0 var(--blue-glow), 0 4px 20px rgba(79,142,247,.3);
+  }
+  .btn-primary:hover {
+    background: #5f9bff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 4px var(--blue-glow), 0 8px 28px rgba(79,142,247,.45);
+  }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--t1); text-decoration: none;
+    padding: 12px 26px; border-radius: 10px;
+    font-weight: 600; font-size: .92rem;
+    border: 1px solid var(--bd-2);
+    transition: all .25s;
+  }
+  .btn-outline:hover {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.18);
+    transform: translateY(-2px);
+  }
+
+  /* Floating chips */
+  .chips { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+  .chip {
+    position: absolute;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+    padding: 6px 14px; border-radius: 50px;
+    font-size: .72rem; font-weight: 500; color: var(--t3);
+    white-space: nowrap; backdrop-filter: blur(10px);
+    animation: chipFloat 9s ease-in-out infinite;
+  }
+  .chip:nth-child(1) { top: 19%; left: 4%; animation-duration: 9s; }
+  .chip:nth-child(2) { top: 29%; right: 4%; animation-delay: 2s; animation-duration: 11s; }
+  .chip:nth-child(3) { top: 65%; left: 3%; animation-delay: 1.2s; animation-duration: 10s; }
+  .chip:nth-child(4) { top: 74%; right: 5%; animation-delay: 3.5s; animation-duration: 8s; }
+  @keyframes chipFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  .hero-scroll {
+    position: absolute; bottom: 30px; left: 50%;
+    transform: translateX(-50%); z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    color: var(--t3); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+    animation: fadeIn 1s 1.2s ease both;
+  }
+  .scroll-bar {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--blue), transparent);
+    animation: scrollAnim 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollAnim { 0%,100%{opacity:.25;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.15)} }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+
+  /* ══════════════════════════════════════
+     MARQUEE
+  ══════════════════════════════════════ */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--bd);
+    border-bottom: 1px solid var(--bd);
+    background: var(--bg-2);
+    padding: 14px 0;
+    position: relative; z-index: 1;
+  }
+  .marquee-wrap::before,
+  .marquee-wrap::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
+    pointer-events: none;
+  }
+  .marquee-wrap::before { left: 0; background: linear-gradient(to right, var(--bg-2), transparent); }
+  .marquee-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg-2), transparent); }
+  .marquee-track {
+    display: flex; gap: 0;
+    width: max-content;
+    animation: marqueeScroll 30s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 0 32px;
+    font-size: .78rem; font-weight: 600; color: var(--t3);
+    letter-spacing: .04em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--blue); opacity: .5; flex-shrink: 0; }
+
+  /* ══════════════════════════════════════
+     SHARED
+  ══════════════════════════════════════ */
+  section { padding: 96px 40px; position: relative; z-index: 1; }
+  .container { max-width: 1160px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--blue); font-size: .75rem; font-weight: 700;
+    letter-spacing: .11em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .eyebrow::before { content:''; display:inline-block; width:18px; height:1px; background:var(--blue); }
+  .section-title {
+    font-family: var(--fh);
+    font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+    font-weight: 800; letter-spacing: -.035em; line-height: 1.12;
+    margin-bottom: 14px;
+  }
+  .section-desc {
+    color: var(--t2); font-size: 1rem;
+    max-width: 540px; line-height: 1.8;
+  }
+
+  /* ══════════════════════════════════════
+     STATS
+  ══════════════════════════════════════ */
+  .stats {
+    background: var(--bg-2);
+    padding: 72px 40px;
+    border-bottom: 1px solid var(--bd);
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    max-width: 1060px; margin: 0 auto;
+    border: 1px solid var(--bd); border-radius: 20px;
+    overflow: hidden;
+  }
+  .stat-card {
+    padding: 40px 32px; text-align: center;
+    border-right: 1px solid var(--bd);
+    position: relative; background: var(--card);
+    transition: background .3s;
+  }
+  .stat-card:last-child { border-right: none; }
+  .stat-card:hover { background: rgba(79,142,247,.04); }
+  .stat-ico {
+    width: 44px; height: 44px;
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; background: rgba(79,142,247,.1);
+  }
+  .stat-ico svg { width: 22px; height: 22px; }
+  .stat-ico.amber { background: rgba(245,158,11,.1); }
+  .stat-ico.amber svg { color: var(--amber); }
+  .stat-ico svg { color: var(--blue); }
+  .stat-val {
+    font-family: var(--fh);
+    font-size: clamp(2rem, 3.5vw, 2.9rem);
+    font-weight: 800; letter-spacing: -.04em; line-height: 1;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, var(--t1) 0%, var(--blue) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .stat-val.ga {
+    background: linear-gradient(135deg, var(--amber-2) 0%, var(--amber) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .stat-lbl { color: var(--t3); font-size: .82rem; font-weight: 500; letter-spacing: .02em; }
+
+  /* ══════════════════════════════════════
+     PLUGINS
+  ══════════════════════════════════════ */
+  .plugins { background: var(--bg); }
+  .plugins-hd {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 52px; flex-wrap: wrap; gap: 20px;
+  }
+  .plugins-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .repo-card {
+    background: var(--card);
+    border: 1px solid var(--bd);
+    border-top: 2px solid transparent;
+    border-radius: var(--r);
+    padding: 26px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform .3s cubic-bezier(.22,1,.36,1),
+                border-color .3s, box-shadow .3s, background .3s;
+  }
+  /* unique top accent colours */
+  .repo-card[data-color="blue"]  { --accent: var(--blue); --accent-bg: rgba(79,142,247,.07); }
+  .repo-card[data-color="amber"] { --accent: var(--amber); --accent-bg: rgba(245,158,11,.07); }
+  .repo-card[data-color="teal"]  { --accent: var(--teal); --accent-bg: rgba(45,212,191,.07); }
+  .repo-card[data-color="purple"]{ --accent: var(--purple); --accent-bg: rgba(167,139,250,.07); }
+  .repo-card[data-color="green"] { --accent: var(--green); --accent-bg: rgba(74,222,128,.07); }
+  .repo-card[data-color="rose"]  { --accent: var(--rose); --accent-bg: rgba(251,113,133,.07); }
+  .repo-card[data-color="slate"] { --accent: var(--slate); --accent-bg: rgba(148,163,184,.07); }
+
+  .repo-card:hover {
+    border-color: var(--accent);
+    border-top-color: var(--accent);
+    background: var(--accent-bg);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,.4),
+                0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .repo-card:hover .repo-glow {
+    opacity: 1;
+  }
+  .repo-glow {
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%);
+    opacity: 0; transition: opacity .4s; pointer-events: none;
+  }
+
+  .pinned-badge {
+    position: absolute; top: 14px; right: 14px;
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.22);
+    color: var(--amber); font-size: .64rem; font-weight: 700;
+    letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 50px;
+  }
+
+  .repo-icon {
+    width: 46px; height: 46px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 11px; font-size: 1.35rem; margin-bottom: 16px;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    flex-shrink: 0;
+  }
+  .repo-name {
+    font-family: var(--fh); font-size: .98rem; font-weight: 700;
+    letter-spacing: -.02em; margin-bottom: 9px; color: var(--t1);
+  }
+  .repo-desc {
+    color: var(--t2); font-size: .845rem; line-height: 1.68; flex: 1;
+  }
+  .repo-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 20px;
+  }
+  .repo-meta {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .repo-meta span {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--t3); font-size: .76rem; font-weight: 500;
+  }
+  .lang-dot {
+    display: inline-block; width: 9px; height: 9px;
+    border-radius: 50%; background: #8b5cf6; flex-shrink: 0;
+  }
+  .repo-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: var(--accent);
+    text-decoration: none; font-size: .79rem; font-weight: 600;
+    transition: gap .2s, opacity .2s;
+    white-space: nowrap;
+  }
+  .repo-link:hover { gap: 9px; }
+  .addon-tag {
+    display: inline-block;
+    background: rgba(148,163,184,.08); border: 1px solid rgba(148,163,184,.15);
+    color: var(--t3); font-size: .7rem; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px; margin-bottom: 10px;
+  }
+
+  /* ══════════════════════════════════════
+     ABOUT
+  ══════════════════════════════════════ */
+  .about { background: var(--bg-2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+
+  .timeline { position: relative; padding-left: 24px; margin-top: 38px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--blue), rgba(79,142,247,.06));
+  }
+  .tl-item {
+    position: relative; margin-bottom: 32px;
+    opacity: 0; transform: translateX(-18px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .tl-item.vis { opacity: 1; transform: translateX(0); }
+  .tl-item::before {
+    content: ''; position: absolute; left: -28px; top: 6px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 3px rgba(79,142,247,.2);
+    animation: tlPulse 3s ease-in-out infinite;
+  }
+  .tl-item:last-child::before { animation-delay: .5s; }
+  @keyframes tlPulse {
+    0%,100%{box-shadow:0 0 0 3px rgba(79,142,247,.2)}
+    50%{box-shadow:0 0 0 6px rgba(79,142,247,.08),0 0 12px rgba(79,142,247,.2)}
+  }
+  .tl-yr {
+    font-size: .72rem; font-weight: 700; color: var(--blue);
+    letter-spacing: .07em; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .tl-ti {
+    font-family: var(--fh); font-size: .94rem; font-weight: 700;
+    color: var(--t1); margin-bottom: 3px;
+  }
+  .tl-de { color: var(--t3); font-size: .83rem; line-height: 1.55; }
+
+  /* Founder card */
+  .founder-card {
+    background: var(--card);
+    border: 1px solid var(--bd); border-radius: 20px;
+    padding: 38px; position: relative; overflow: hidden;
+  }
+  .founder-card::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: 20px;
+    background: radial-gradient(ellipse at top right, rgba(79,142,247,.07), transparent 60%);
+    pointer-events: none;
+  }
+  .avatar-wrap { position: relative; width: 68px; margin-bottom: 20px; }
+  .avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--amber));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--fh); font-size: 1.4rem; font-weight: 800; color: #fff;
+    position: relative; z-index: 1;
+  }
+  .avatar-ring {
+    position: absolute; inset: -3px; border-radius: 50%;
+    background: conic-gradient(var(--blue), var(--amber), var(--blue));
+    animation: spinRing 4s linear infinite;
+    z-index: 0;
+  }
+  .avatar-ring::before {
+    content: ''; position: absolute; inset: 3px;
+    border-radius: 50%; background: var(--bg-3);
+  }
+  @keyframes spinRing { to { transform: rotate(360deg); } }
+
+  .f-name  { font-family:var(--fh); font-size:1.25rem; font-weight:800; letter-spacing:-.03em; margin-bottom:3px; }
+  .f-role  { color:var(--blue); font-size:.82rem; font-weight:600; margin-bottom:18px; }
+  .f-bio   { color:var(--t2); font-size:.875rem; line-height:1.75; margin-bottom:22px; }
+  .f-links { display:flex; gap:10px; flex-wrap:wrap; }
+  .f-link {
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,.05); border:1px solid var(--bd);
+    color:var(--t2); text-decoration:none; padding:7px 14px;
+    border-radius:8px; font-size:.78rem; font-weight:500;
+    transition:all .2s;
+  }
+  .f-link:hover { background:var(--blue); border-color:var(--blue); color:#fff; transform:translateY(-1px); }
+
+  /* ══════════════════════════════════════
+     GITHUB CTA
+  ══════════════════════════════════════ */
+  .gh-section { background: var(--bg); }
+  .gh-box {
+    position: relative; overflow: hidden;
+    border-radius: 24px; padding: 80px 60px;
+    text-align: center;
+    border: 1px solid rgba(79,142,247,.18);
+    background: var(--bg-2);
+  }
+  /* mesh gradient */
+  .gh-box::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: 24px;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(79,142,247,.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(245,158,11,.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(79,142,247,.07) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  /* grid */
+  .gh-box::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: 24px;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .gh-box > * { position: relative; z-index: 1; }
+  .gh-icon {
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,.07); border: 1px solid var(--bd-2);
+    border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .gh-box:hover .gh-icon {
+    transform: translateY(-2px) rotate(-3deg);
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  }
+  .gh-box h2 {
+    font-family: var(--fh);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800; letter-spacing: -.04em; margin-bottom: 14px;
+  }
+  .gh-box p {
+    color: var(--t2); font-size: 1.02rem;
+    max-width: 480px; margin: 0 auto 36px; line-height: 1.8;
+  }
+  .gh-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-white {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--t1); color: var(--bg);
+    text-decoration: none; padding: 13px 28px;
+    border-radius: 10px; font-weight: 700; font-size: .92rem;
+    transition: all .25s;
+  }
+  .btn-white:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,255,255,.15); }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  footer {
+    background: var(--bg-2);
+    border-top: 1px solid var(--bd);
+    padding: 60px 40px 40px;
+    position: relative; z-index: 1;
+  }
+  .footer-inner { max-width: 1160px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 56px;
+  }
+  .f-brand img { height: 32px; margin-bottom: 16px; }
+  .f-brand p { color: var(--t3); font-size: .85rem; line-height: 1.7; max-width: 230px; margin-bottom: 20px; }
+  .f-socials { display: flex; gap: 9px; }
+  .f-soc {
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+    background: var(--card); border: 1px solid var(--bd);
+    border-radius: 8px; color: var(--t3); text-decoration: none;
+    transition: all .2s;
+  }
+  .f-soc:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .f-col h4 {
+    font-family: var(--fh); font-size: .75rem; font-weight: 700;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--t1); margin-bottom: 18px;
+  }
+  .f-col ul { list-style: none; }
+  .f-col li { margin-bottom: 10px; }
+  .f-col a { color: var(--t3); text-decoration: none; font-size: .855rem; transition: color .2s; }
+  .f-col a:hover { color: var(--t1); }
+  .footer-bot {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 30px; border-top: 1px solid var(--bd);
+    flex-wrap: wrap; gap: 14px;
+  }
+  .footer-bot p { color: var(--t3); font-size: .78rem; }
+  .footer-bot a { color: var(--t2); text-decoration: none; transition: color .2s; }
+  .footer-bot a:hover { color: var(--blue); }
+  .wp-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.17);
+    color: var(--amber); font-size: .72rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 50px;
+  }
+
+  /* ══════════════════════════════════════
+     REVEAL
+  ══════════════════════════════════════ */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.vis { opacity: 1; transform: translateY(0); }
+  .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+  .d4{transition-delay:.32s} .d5{transition-delay:.40s} .d6{transition-delay:.48s}
+  .d7{transition-delay:.56s} .d8{transition-delay:.64s} .d9{transition-delay:.72s}
+
+  /* ══════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════ */
+  @media(max-width:1024px) {
+    .plugins-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media(max-width:900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-links.open {
       display: flex; flex-direction: column;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(8,12,24,.98); backdrop-filter: blur(24px);
+      padding: 22px; gap: 18px;
+      border-bottom: 1px solid var(--bd); z-index: 199;
     }
-    .repo-card:hover {
-      background: rgba(79,142,247,.05);
-      border-color: rgba(79,142,247,.25);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(79,142,247,.12);
-    }
-    .repo-card.pinned { border-color: rgba(79,142,247,.18); }
-    .repo-pin {
-      position: absolute; top: 16px; right: 16px;
-      display: inline-flex; align-items: center; gap: 4px;
-      background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.2);
-      color: var(--amber); font-size: .66rem; font-weight: 700;
-      letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px; border-radius: 50px;
-    }
-    .repo-icon {
-      width: 46px; height: 46px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 10px; font-size: 1.4rem; margin-bottom: 16px; flex-shrink: 0;
-    }
-    .ic-blue   { background: rgba(79,142,247,.12); }
-    .ic-amber  { background: rgba(245,158,11,.12); }
-    .ic-teal   { background: rgba(20,184,166,.12); }
-    .ic-purple { background: rgba(139,92,246,.12); }
-    .ic-green  { background: rgba(34,197,94,.12); }
-    .ic-rose   { background: rgba(244,63,94,.12); }
-    .ic-slate  { background: rgba(148,163,184,.1); }
-
-    .repo-name { font-family: var(--fh); font-size: 1rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; color: var(--text-1); }
-    .repo-desc { color: var(--text-2); font-size: .855rem; line-height: 1.65; flex: 1; }
-    .repo-meta { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
-    .repo-meta span { display: inline-flex; align-items: center; gap: 5px; color: var(--text-3); font-size: .78rem; }
-    .repo-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      color: var(--blue); text-decoration: none; font-size: .8rem;
-      font-weight: 600; margin-top: 18px; transition: gap .2s;
-    }
-    .repo-link:hover { gap: 9px; }
-
-    /* ── ABOUT ── */
-    .about { background: var(--navy-2); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-
-    .timeline { position: relative; padding-left: 22px; margin-top: 36px; }
-    .timeline::before { content:''; position:absolute; left:0; top:6px; bottom:6px; width:1px; background:linear-gradient(to bottom, var(--blue), rgba(79,142,247,.08)); }
-    .tl { position: relative; margin-bottom: 28px; opacity:0; transform:translateX(-16px); transition: all .5s ease; }
-    .tl.vis { opacity:1; transform:translateX(0); }
-    .tl::before { content:''; position:absolute; left:-26px; top:6px; width:8px; height:8px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 3px rgba(79,142,247,.2); }
-    .tl-yr { font-size:.73rem; font-weight:700; color:var(--blue); letter-spacing:.06em; text-transform:uppercase; margin-bottom:3px; }
-    .tl-ti { font-family:var(--fh); font-size:.95rem; font-weight:700; color:var(--text-1); margin-bottom:3px; }
-    .tl-de { color:var(--text-3); font-size:.83rem; line-height:1.5; }
-
-    .founder-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 18px; padding: 36px; position: relative; overflow: hidden;
-    }
-    .founder-card::after { content:''; position:absolute; top:-50px; right:-50px; width:180px; height:180px; border-radius:50%; background:radial-gradient(circle, rgba(79,142,247,.12), transparent 70%); pointer-events:none; }
-    .avatar { width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--amber)); display:flex; align-items:center; justify-content:center; font-family:var(--fh); font-size:1.4rem; font-weight:800; color:#fff; margin-bottom:18px; }
-    .founder-name { font-family:var(--fh); font-size:1.3rem; font-weight:800; letter-spacing:-.03em; margin-bottom:3px; }
-    .founder-role { color:var(--blue); font-size:.82rem; font-weight:600; margin-bottom:18px; }
-    .founder-bio { color:var(--text-2); font-size:.875rem; line-height:1.7; margin-bottom:22px; }
-    .founder-links { display:flex; gap:10px; flex-wrap:wrap; }
-    .fl {
-      display:inline-flex; align-items:center; gap:6px;
-      background:rgba(255,255,255,.05); border:1px solid var(--border);
-      color:var(--text-2); text-decoration:none; padding:7px 14px;
-      border-radius:8px; font-size:.78rem; font-weight:500; transition:all .2s;
-    }
-    .fl:hover { background:var(--blue); border-color:var(--blue); color:#fff; }
-
-    /* ── GITHUB CTA ── */
-    .gh-cta { background:var(--navy); position:relative; overflow:hidden; }
-    .gh-cta::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px); background-size:42px 42px; }
-    .gh-box {
-      position:relative; background:linear-gradient(135deg, rgba(79,142,247,.07), rgba(245,158,11,.04));
-      border:1px solid rgba(79,142,247,.2); border-radius:22px;
-      padding:68px 56px; text-align:center; max-width:780px; margin:0 auto;
-    }
-    .gh-icon { width:60px; height:60px; background:rgba(255,255,255,.06); border:1px solid var(--border); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; }
-    .gh-cta h2 { font-family:var(--fh); font-size:clamp(1.7rem,4vw,2.6rem); font-weight:800; letter-spacing:-.04em; margin-bottom:14px; }
-    .gh-cta p { color:var(--text-2); font-size:1rem; max-width:480px; margin:0 auto 32px; line-height:1.75; }
-    .gh-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-    .btn-white { display:inline-flex; align-items:center; gap:9px; background:var(--text-1); color:var(--navy); text-decoration:none; padding:13px 26px; border-radius:10px; font-weight:700; font-size:.92rem; transition:all .25s; }
-    .btn-white:hover { background:#fff; transform:translateY(-2px); box-shadow:0 8px 28px rgba(255,255,255,.18); }
-
-    /* ── FOOTER ── */
-    footer { background:var(--navy-2); border-top:1px solid var(--border); padding:56px 40px 36px; }
-    .footer-inner { max-width:1160px; margin:0 auto; }
-    .footer-top { display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:44px; margin-bottom:52px; }
-    .footer-brand img { height:34px; margin-bottom:14px; }
-    .footer-brand p { color:var(--text-3); font-size:.855rem; line-height:1.65; max-width:240px; margin-bottom:18px; }
-    .socials { display:flex; gap:9px; }
-    .soc { width:34px; height:34px; display:flex; align-items:center; justify-content:center; background:var(--card-bg); border:1px solid var(--border); border-radius:7px; color:var(--text-3); text-decoration:none; transition:all .2s; }
-    .soc:hover { background:var(--blue); border-color:var(--blue); color:#fff; }
-    .fcol h4 { font-family:var(--fh); font-size:.77rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-1); margin-bottom:18px; }
-    .fcol ul { list-style:none; }
-    .fcol li { margin-bottom:9px; }
-    .fcol a { color:var(--text-3); text-decoration:none; font-size:.855rem; transition:color .2s; }
-    .fcol a:hover { color:var(--text-1); }
-    .footer-bottom { display:flex; align-items:center; justify-content:space-between; padding-top:28px; border-top:1px solid var(--border); flex-wrap:wrap; gap:14px; }
-    .footer-bottom p { color:var(--text-3); font-size:.78rem; }
-    .footer-bottom a { color:var(--text-2); text-decoration:none; }
-    .footer-bottom a:hover { color:var(--blue); }
-    .wp-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.18); color:var(--amber); font-size:.72rem; font-weight:600; padding:4px 11px; border-radius:50px; }
-
-    /* ── REVEAL ── */
-    .reveal { opacity:0; transform:translateY(26px); transition:opacity .65s ease, transform .65s ease; }
-    .reveal.vis { opacity:1; transform:translateY(0); }
-    .d1 { transition-delay:.1s; } .d2 { transition-delay:.18s; } .d3 { transition-delay:.26s; } .d4 { transition-delay:.34s; }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:900px){
-      nav{padding:0 20px;}
-      .nav-links{display:none;}
-      .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(11,15,30,.97);backdrop-filter:blur(20px);padding:20px;gap:18px;border-bottom:1px solid var(--border);z-index:99;}
-      .hamburger{display:flex;}
-      .hero{padding:110px 20px 70px;}
-      section{padding:64px 20px;}
-      .stats-grid{grid-template-columns:repeat(2,1fr);}
-      .stat-card:nth-child(3)::before{display:none;}
-      .repos-grid{grid-template-columns:1fr;}
-      .about-grid{grid-template-columns:1fr;gap:44px;}
-      .gh-box{padding:44px 24px;}
-      .footer-top{grid-template-columns:1fr 1fr;}
-      .footer-brand{grid-column:1/-1;}
-      .chips .chip{display:none;}
-    }
-    @media(max-width:600px){
-      .stats-grid{grid-template-columns:1fr 1fr;}
-      .stat-card+.stat-card::before{display:none;}
-      .footer-top{grid-template-columns:1fr;}
-      .hero-ctas{flex-direction:column;align-items:stretch;}
-      .hero-ctas a{text-align:center;justify-content:center;}
-      .gh-btns{flex-direction:column;align-items:stretch;}
-      .gh-btns a{text-align:center;justify-content:center;}
-    }
+    .hamburger { display: flex; }
+    .hero { padding: 110px 24px 90px; }
+    section { padding: 70px 24px; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .stat-card:nth-child(2) { border-right: none; }
+    .stat-card:nth-child(3) { border-top: 1px solid var(--bd); }
+    .plugins-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 52px; }
+    .gh-box { padding: 48px 28px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .f-brand { grid-column: 1/-1; }
+    .chips .chip { display: none; }
+  }
+  @media(max-width:600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat-card { border-right: none; border-bottom: 1px solid var(--bd); }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-ctas, .gh-btns { flex-direction: column; align-items: stretch; }
+    .hero-ctas a, .gh-btns a { text-align: center; justify-content: center; }
+  }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════ NAV ══════════ -->
 <nav id="nav">
   <a href="#" class="nav-logo">
     <img src="WebberZone Logo.png" alt="WebberZone" onerror="this.style.display='none'">
-    <span>WebberZone</span>
+    <span class="nav-wordmark">WebberZone</span>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#plugins">Plugins</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="https://github.com/WebberZone" target="_blank" class="btn-nav">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-      GitHub
-    </a></li>
+    <li>
+      <a href="https://github.com/WebberZone" target="_blank" class="btn-gh">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </li>
   </ul>
   <div class="hamburger" id="ham" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════ HERO ══════════ -->
 <section class="hero" id="home">
+  <canvas id="starCanvas"></canvas>
+  <div class="hero-grid"></div>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
+
   <div class="chips" aria-hidden="true">
     <div class="chip">🔗 Related Posts</div>
     <div class="chip">📊 Popular Posts</div>
     <div class="chip">🔍 Better Search</div>
     <div class="chip">📚 Knowledge Base</div>
   </div>
+
   <div class="hero-inner">
     <div class="hero-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      <span class="badge-dot"></span>
       Open Source on GitHub
     </div>
-    <h1>WordPress Plugins<br><span class="grad">That Keep Users Coming Back</span></h1>
+
+    <h1>
+      <span class="line-plain">WordPress Plugins</span>
+      <span class="grad">That Keep Users Coming Back</span>
+    </h1>
+
     <p class="hero-sub">
       Free, open-source WordPress plugins focused on user retention and engagement.
-      Built and actively maintained by Ajay D'Souza since 2005.
+      Built and actively maintained by Ajay&nbsp;D'Souza since&nbsp;2005.
     </p>
+
     <div class="hero-ctas">
       <a href="#plugins" class="btn-primary">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         Browse Plugins
       </a>
-      <a href="https://github.com/WebberZone" target="_blank" class="btn-ghost">
+      <a href="https://github.com/WebberZone" target="_blank" class="btn-outline">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         github.com/WebberZone
       </a>
     </div>
   </div>
+
   <div class="hero-scroll" aria-hidden="true">
-    <div class="scroll-line"></div>
+    <div class="scroll-bar"></div>
     <span>Scroll</span>
   </div>
 </section>
 
-<!-- STATS -->
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- JS will duplicate these -->
+    <span class="marquee-item"><span class="marquee-dot"></span>Contextual Related Posts</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Top 10 Popular Posts</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Better Search</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Knowledge Base</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>WebberZone Snippetz</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Followed Posts</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Auto Close</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Link Warnings</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Popular Authors</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Open Source · Free Forever</span>
+  </div>
+</div>
+
+<!-- ══════════ STATS ══════════ -->
 <div class="stats">
   <div class="stats-grid">
     <div class="stat-card reveal">
-      <span class="stat-icon">🌍</span>
-      <div class="stat-value" data-target="100000" data-suffix="+">&nbsp;</div>
-      <div class="stat-label">Active WordPress Sites</div>
+      <div class="stat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      </div>
+      <div class="stat-val" data-target="100000" data-suffix="+">&nbsp;</div>
+      <div class="stat-lbl">Active WordPress Sites</div>
     </div>
     <div class="stat-card reveal d1">
-      <span class="stat-icon">⬇️</span>
-      <div class="stat-value g-amber" data-target="2000000" data-suffix="+">&nbsp;</div>
-      <div class="stat-label">Total Downloads</div>
+      <div class="stat-ico amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <div class="stat-val ga" data-target="2000000" data-suffix="+">&nbsp;</div>
+      <div class="stat-lbl">Total Downloads</div>
     </div>
     <div class="stat-card reveal d2">
-      <span class="stat-icon">📅</span>
-      <div class="stat-value" data-target="20" data-suffix="+ yrs">&nbsp;</div>
-      <div class="stat-label">Development Experience</div>
+      <div class="stat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="stat-val" data-target="20" data-suffix="+ yrs">&nbsp;</div>
+      <div class="stat-lbl">Development Experience</div>
     </div>
     <div class="stat-card reveal d3">
-      <span class="stat-icon">📦</span>
-      <div class="stat-value g-amber" data-target="9" data-suffix="">&nbsp;</div>
-      <div class="stat-label">Free Open-Source Plugins</div>
+      <div class="stat-ico amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <div class="stat-val ga" data-target="9" data-suffix="">&nbsp;</div>
+      <div class="stat-lbl">Free Open-Source Plugins</div>
     </div>
   </div>
 </div>
 
-<!-- PLUGINS -->
-<section class="repos" id="plugins">
+<!-- ══════════ PLUGINS ══════════ -->
+<section class="plugins" id="plugins">
   <div class="container">
-    <div class="repos-header">
+    <div class="plugins-hd">
       <div>
-        <div class="section-label">Open Source</div>
-        <h2 class="section-title">Free WordPress Plugins</h2>
-        <p class="section-desc">All plugins are free, open-source, and actively maintained on GitHub. Compatible with the block editor, classic editor, and the latest WordPress &amp; PHP versions.</p>
+        <div class="eyebrow reveal">Open Source</div>
+        <h2 class="section-title reveal">Free WordPress Plugins</h2>
+        <p class="section-desc reveal">All plugins are free, open-source, and actively maintained on GitHub. Compatible with the block editor, classic editor, and the latest WordPress &amp; PHP versions.</p>
       </div>
-      <a href="https://github.com/WebberZone" target="_blank" class="btn-ghost" style="white-space:nowrap">View All on GitHub ↗</a>
+      <a href="https://github.com/WebberZone" target="_blank" class="btn-outline reveal" style="white-space:nowrap;align-self:flex-end">
+        View All on GitHub ↗
+      </a>
     </div>
-    <div class="repos-grid">
 
-      <!-- Contextual Related Posts -->
-      <div class="repo-card pinned reveal">
-        <span class="repo-pin">⭐ Pinned</span>
-        <div class="repo-icon ic-blue">🔗</div>
+    <div class="plugins-grid">
+
+      <div class="repo-card pinned reveal" data-color="blue">
+        <div class="repo-glow"></div>
+        <span class="pinned-badge">⭐ Pinned</span>
+        <div class="repo-icon">🔗</div>
         <div class="repo-name">Contextual Related Posts</div>
-        <p class="repo-desc">Display fast, intelligent related posts based on post title and content. Supports blocks, shortcodes, and widgets. Improves SEO, increases pageviews, and lowers bounce rates.</p>
-        <div class="repo-meta">
-          <span>⭐ 38</span>
-          <span>🍴 22</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <p class="repo-desc">Display fast, intelligent related posts based on title and content. Supports blocks, shortcodes, and widgets. Improves SEO, increases pageviews, and lowers bounce rates.</p>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>⭐ 38</span>
+            <span>🍴 22</span>
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/contextual-related-posts" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/contextual-related-posts" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Top 10 -->
-      <div class="repo-card pinned reveal d1">
-        <span class="repo-pin">⭐ Pinned</span>
-        <div class="repo-icon ic-amber">📊</div>
+      <div class="repo-card pinned reveal d1" data-color="amber">
+        <div class="repo-glow"></div>
+        <span class="pinned-badge">⭐ Pinned</span>
+        <div class="repo-icon">📊</div>
         <div class="repo-name">Top 10 — Popular Posts</div>
         <p class="repo-desc">Track page views and display the most popular posts on your site. Provides widgets, shortcodes, blocks, and dashboard statistics for posts, pages, and custom post types.</p>
-        <div class="repo-meta">
-          <span>⭐ 18</span>
-          <span>🍴 22</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>⭐ 18</span>
+            <span>🍴 22</span>
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/top-10" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/top-10" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Better Search -->
-      <div class="repo-card pinned reveal d2">
-        <span class="repo-pin">⭐ Pinned</span>
-        <div class="repo-icon ic-teal">🔍</div>
+      <div class="repo-card pinned reveal d2" data-color="teal">
+        <div class="repo-glow"></div>
+        <span class="pinned-badge">⭐ Pinned</span>
+        <div class="repo-icon">🔍</div>
         <div class="repo-name">Better Search</div>
         <p class="repo-desc">Replace WordPress's default search with contextual, relevance-sorted results. Supports post meta, tags, categories, and custom taxonomies for a far superior search experience.</p>
-        <div class="repo-meta">
-          <span>⭐ 21</span>
-          <span>🍴 14</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>⭐ 21</span>
+            <span>🍴 14</span>
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/better-search" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/better-search" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Knowledge Base -->
-      <div class="repo-card pinned reveal">
-        <span class="repo-pin">⭐ Pinned</span>
-        <div class="repo-icon ic-purple">📚</div>
+      <div class="repo-card pinned reveal d3" data-color="purple">
+        <div class="repo-glow"></div>
+        <span class="pinned-badge">⭐ Pinned</span>
+        <div class="repo-icon">📚</div>
         <div class="repo-name">Knowledge Base</div>
         <p class="repo-desc">The easiest way to add a FAQ or documentation section to your WordPress blog. Create articles, categories, tags, ratings, breadcrumbs, and search — all with blocks or shortcodes.</p>
-        <div class="repo-meta">
-          <span>⭐ 19</span>
-          <span>🍴 6</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>⭐ 19</span>
+            <span>🍴 6</span>
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/knowledgebase" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/knowledgebase" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Snippetz -->
-      <div class="repo-card pinned reveal d1">
-        <span class="repo-pin">⭐ Pinned</span>
-        <div class="repo-icon ic-green">⚡</div>
+      <div class="repo-card pinned reveal d4" data-color="green">
+        <div class="repo-glow"></div>
+        <span class="pinned-badge">⭐ Pinned</span>
+        <div class="repo-icon">⚡</div>
         <div class="repo-name">WebberZone Snippetz</div>
         <p class="repo-desc">Create and manage custom snippets of HTML, CSS, or JavaScript for your site's header, footer, and content areas. Use conditional tags to control exactly where each snippet appears.</p>
-        <div class="repo-meta">
-          <span>⭐ 1</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>⭐ 1</span>
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/add-to-all" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/add-to-all" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Followed Posts -->
-      <div class="repo-card reveal d2">
-        <div class="repo-icon ic-rose">👥</div>
+      <div class="repo-card reveal d5" data-color="rose">
+        <div class="repo-glow"></div>
+        <div class="repo-icon">👥</div>
         <div class="repo-name">WebberZone Followed Posts</div>
         <p class="repo-desc">Show visitors the posts that other users have recently viewed. A social proof–driven way to suggest relevant content and spark curiosity in your readers.</p>
-        <div class="repo-meta">
-          <span>🍴 1</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>🍴 1</span>
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Auto Close -->
-      <div class="repo-card reveal">
-        <div class="repo-icon ic-teal">🔒</div>
+      <div class="repo-card reveal d6" data-color="teal">
+        <div class="repo-glow"></div>
+        <div class="repo-icon">🔒</div>
         <div class="repo-name">Auto Close</div>
         <p class="repo-desc">Automatically close comments, pingbacks, and trackbacks on posts older than a specified age. A simple, effective way to keep comment spam off aging content.</p>
-        <div class="repo-meta">
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/autoclose" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/autoclose" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Link Warnings -->
-      <div class="repo-card reveal d1">
-        <div class="repo-icon ic-amber">⚠️</div>
+      <div class="repo-card reveal d7" data-color="amber">
+        <div class="repo-glow"></div>
+        <div class="repo-icon">⚠️</div>
         <div class="repo-name">WebberZone Link Warnings</div>
         <p class="repo-desc">Enhance accessibility by warning users when links open in new windows or navigate to external sites. Adds clear, WCAG-compliant visual indicators to improve user trust.</p>
-        <div class="repo-meta">
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/webberzone-link-warnings" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/webberzone-link-warnings" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
-      <!-- Popular Authors -->
-      <div class="repo-card reveal d2">
-        <div class="repo-icon ic-slate">✍️</div>
+      <div class="repo-card reveal d8" data-color="slate">
+        <div class="repo-glow"></div>
+        <div class="repo-icon">✍️</div>
         <div class="repo-name">Popular Authors</div>
-        <p class="repo-desc">Show a list of the most popular authors on your site using a widget or shortcode. An add-on for the Top 10 plugin that ranks authors based on their total view counts.</p>
-        <div class="repo-meta">
-          <span style="color:var(--text-3);font-size:.75rem">Requires Top 10</span>
-          <span style="color:var(--blue);font-size:.75rem">PHP</span>
+        <div class="addon-tag">Add-on for Top 10</div>
+        <p class="repo-desc">Show a list of the most popular authors on your site using a widget or shortcode. Ranks authors based on their total view counts recorded by Top 10.</p>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span><span class="lang-dot"></span>PHP</span>
+          </div>
+          <a href="https://github.com/WebberZone/popular-authors" target="_blank" class="repo-link">
+            GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
-        <a href="https://github.com/WebberZone/popular-authors" target="_blank" class="repo-link">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ══════════ ABOUT ══════════ -->
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
+
       <div>
-        <div class="section-label reveal">The Story</div>
+        <div class="eyebrow reveal">The Story</div>
         <h2 class="section-title reveal">20+ Years of<br>WordPress Development</h2>
         <p class="section-desc reveal">WebberZone is home to some of the best free WordPress plugins. Run by Ajay D'Souza who has been a WordPress user from 2003 and a WordPress plugin developer since 2005.</p>
+
         <div class="timeline">
-          <div class="tl">
+          <div class="tl-item">
             <div class="tl-yr">2003</div>
             <div class="tl-ti">Discovered WordPress</div>
             <div class="tl-de">Ajay D'Souza begins using WordPress as one of its earliest adopters.</div>
           </div>
-          <div class="tl">
+          <div class="tl-item">
             <div class="tl-yr">2005</div>
             <div class="tl-ti">First Plugin Published</div>
-            <div class="tl-de">Begins developing and publishing WordPress plugins to the community.</div>
+            <div class="tl-de">Begins developing and publishing WordPress plugins for the community.</div>
           </div>
-          <div class="tl">
+          <div class="tl-item">
             <div class="tl-yr">2009</div>
             <div class="tl-ti">Contextual Related Posts</div>
             <div class="tl-de">Releases one of the flagship plugins — still actively maintained 16+ years later.</div>
           </div>
-          <div class="tl">
+          <div class="tl-item">
             <div class="tl-yr">Today</div>
-            <div class="tl-ti">100,000+ Sites, 2M+ Downloads</div>
+            <div class="tl-ti">100,000+ Sites · 2M+ Downloads</div>
             <div class="tl-de">WebberZone plugins are trusted by over 100,000 WordPress sites worldwide.</div>
           </div>
         </div>
       </div>
 
       <div class="founder-card reveal d2">
-        <div class="avatar">AJ</div>
-        <div class="founder-name">Ajay D'Souza</div>
-        <div class="founder-role">Core Developer · WebberZone</div>
-        <p class="founder-bio">A WordPress veteran since 2003 and plugin developer since 2005, Ajay has spent over two decades crafting free, open-source tools that help WordPress site owners enhance user experience, improve engagement, and grow their audiences. His plugins have been downloaded over 2 million times.</p>
-        <div class="founder-links">
-          <a href="https://webberzone.com" target="_blank" class="fl">
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+          <div class="avatar">AJ</div>
+        </div>
+        <div class="f-name">Ajay D'Souza</div>
+        <div class="f-role">Core Developer · WebberZone</div>
+        <p class="f-bio">A WordPress veteran since 2003 and plugin developer since 2005, Ajay has spent over two decades crafting free, open-source tools that help WordPress site owners enhance user experience, improve engagement, and grow their audiences. His plugins have been downloaded over 2 million times.</p>
+        <div class="f-links">
+          <a href="https://webberzone.com" target="_blank" class="f-link">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
             WebberZone.com
           </a>
-          <a href="https://github.com/ajaydsouza" target="_blank" class="fl">
+          <a href="https://github.com/ajaydsouza" target="_blank" class="f-link">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
-          <a href="https://profiles.wordpress.org/ajay/" target="_blank" class="fl">
+          <a href="https://profiles.wordpress.org/ajay/" target="_blank" class="f-link">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.109m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08-3.915-11.745c.645-.03 1.23-.105 1.23-.105.585-.075.516-.93-.063-.9 0 0-1.755.135-2.88.135-.201 0-.44-.005-.69-.015C3.926 3.675 7.763 1.5 12.001 1.5c3.159 0 6.03 1.209 8.191 3.18-.056-.004-.109-.009-.169-.009-1.063 0-1.815.924-1.815 1.919 0 .89.513 1.643 1.056 2.535.411.72.882 1.649.882 2.994 0 .921-.354 1.995-.836 3.479l-1.096 3.66-3.988-11.858zm-3.375 13.5l-3.95-10.815c.66-.03 1.257-.104 1.257-.104.585-.075.516-.93-.063-.9 0 0-1.755.135-2.88.135-.203 0-.445-.006-.699-.016 1.738 2.536 2.783 5.608 2.783 8.93 0 .794-.075 1.575-.196 2.34zm-7.62-1.515c-.764-1.409-1.2-3.03-1.2-4.755 0-3.075 1.245-5.865 3.255-7.875L1.5 12c0 2.475.63 4.8 1.743 6.81z"/></svg>
             WordPress.org
           </a>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- GITHUB CTA -->
-<section class="gh-cta" id="github">
+<!-- ══════════ GITHUB CTA ══════════ -->
+<section class="gh-section" id="github">
   <div class="container">
     <div class="gh-box reveal">
       <div class="gh-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--text-1)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--t1)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </div>
       <h2>Explore &amp; Contribute on GitHub</h2>
       <p>All WebberZone plugins are open source. Browse the code, open issues, submit pull requests, or star your favourites at <strong>github.com/WebberZone</strong>.</p>
@@ -669,32 +1134,33 @@
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           View github.com/WebberZone
         </a>
-        <a href="https://webberzone.com" target="_blank" class="btn-ghost">Visit WebberZone.com ↗</a>
+        <a href="https://webberzone.com" target="_blank" class="btn-outline">Visit WebberZone.com ↗</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
+      <div class="f-brand">
         <img src="WebberZone Logo.png" alt="WebberZone" onerror="this.style.display='none'">
         <p>Free, open-source WordPress plugins for user retention and engagement. Trusted by 100,000+ sites since 2005.</p>
-        <div class="socials">
-          <a href="https://github.com/WebberZone" target="_blank" class="soc" aria-label="GitHub">
+        <div class="f-socials">
+          <a href="https://github.com/WebberZone" target="_blank" class="f-soc" aria-label="GitHub">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
-          <a href="https://profiles.wordpress.org/ajay/" target="_blank" class="soc" aria-label="WordPress.org">
+          <a href="https://profiles.wordpress.org/ajay/" target="_blank" class="f-soc" aria-label="WordPress.org">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.109m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08-3.915-11.745c.645-.03 1.23-.105 1.23-.105.585-.075.516-.93-.063-.9 0 0-1.755.135-2.88.135-.201 0-.44-.005-.69-.015C3.926 3.675 7.763 1.5 12.001 1.5c3.159 0 6.03 1.209 8.191 3.18-.056-.004-.109-.009-.169-.009-1.063 0-1.815.924-1.815 1.919 0 .89.513 1.643 1.056 2.535.411.72.882 1.649.882 2.994 0 .921-.354 1.995-.836 3.479l-1.096 3.66-3.988-11.858zm-3.375 13.5l-3.95-10.815c.66-.03 1.257-.104 1.257-.104.585-.075.516-.93-.063-.9 0 0-1.755.135-2.88.135-.203 0-.445-.006-.699-.016 1.738 2.536 2.783 5.608 2.783 8.93 0 .794-.075 1.575-.196 2.34zm-7.62-1.515c-.764-1.409-1.2-3.03-1.2-4.755 0-3.075 1.245-5.865 3.255-7.875L1.5 12c0 2.475.63 4.8 1.743 6.81z"/></svg>
           </a>
-          <a href="https://webberzone.com" target="_blank" class="soc" aria-label="WebberZone.com">
+          <a href="https://webberzone.com" target="_blank" class="f-soc" aria-label="WebberZone.com">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
           </a>
         </div>
       </div>
-      <div class="fcol">
+
+      <div class="f-col">
         <h4>Plugins</h4>
         <ul>
           <li><a href="https://github.com/WebberZone/contextual-related-posts" target="_blank">Contextual Related Posts</a></li>
@@ -705,7 +1171,8 @@
           <li><a href="https://github.com/WebberZone/autoclose" target="_blank">Auto Close</a></li>
         </ul>
       </div>
-      <div class="fcol">
+
+      <div class="f-col">
         <h4>More Plugins</h4>
         <ul>
           <li><a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank">Followed Posts</a></li>
@@ -713,70 +1180,134 @@
           <li><a href="https://github.com/WebberZone/popular-authors" target="_blank">Popular Authors</a></li>
         </ul>
       </div>
-      <div class="fcol">
+
+      <div class="f-col">
         <h4>Links</h4>
         <ul>
           <li><a href="https://github.com/WebberZone" target="_blank">GitHub Org</a></li>
           <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
-          <li><a href="https://profiles.wordpress.org/ajay/" target="_blank">WordPress.org</a></li>
+          <li><a href="https://profiles.wordpress.org/ajay/" target="_blank">WordPress.org Profile</a></li>
           <li><a href="https://github.com/ajaydsouza" target="_blank">Ajay on GitHub</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+
+    <div class="footer-bot">
       <p>© 2025 <a href="https://webberzone.com" target="_blank">WebberZone</a> · <a href="https://github.com/WebberZone" target="_blank">github.com/WebberZone</a></p>
-      <span class="wp-badge">❤️ Built for WordPress</span>
+      <span class="wp-chip">❤️ Built for WordPress</span>
     </div>
   </div>
 </footer>
 
 <script>
-  /* nav scroll */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+/* ── Nav ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
 
-  /* mobile menu */
-  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
-  document.getElementById('navLinks').querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
-  );
+function toggleNav() {
+  const links = document.getElementById('navLinks');
+  const ham = document.getElementById('ham');
+  links.classList.toggle('open');
+  ham.classList.toggle('open');
+}
+document.getElementById('navLinks').querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('ham').classList.remove('open');
+  })
+);
 
-  /* smooth scroll */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href').slice(1);
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el) { e.preventDefault(); window.scrollTo({top: el.getBoundingClientRect().top + scrollY - 64, behavior:'smooth'}); }
-    });
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); window.scrollTo({top: el.getBoundingClientRect().top + scrollY - 64, behavior:'smooth'}); }
   });
+});
 
-  /* reveal on scroll */
-  const ro = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
-  }, {threshold: 0.1});
-  document.querySelectorAll('.reveal, .tl').forEach(el => ro.observe(el));
+/* ── Scroll reveal ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal, .tl-item').forEach(el => ro.observe(el));
 
-  /* counters */
-  function fmt(n, sfx) {
-    if (n >= 1e6) return (n/1e6).toFixed(1).replace('.0','') + 'M' + sfx;
-    if (n >= 1e3) return Math.round(n/1e3) + 'K' + sfx;
-    return n + sfx;
+/* ── Animated counters ── */
+function fmt(n, sfx) {
+  if (n >= 1e6) return (n/1e6).toFixed(n%1e6===0?0:1)+'M'+sfx;
+  if (n >= 1e3) return Math.round(n/1e3)+'K'+sfx;
+  return n+sfx;
+}
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.target, sfx = el.dataset.suffix||'', t0 = performance.now();
+    const ease = p => 1 - Math.pow(1-p, 3);
+    (function tick(now) {
+      const p = Math.min((now-t0)/1800, 1);
+      el.textContent = fmt(Math.round(ease(p)*target), sfx);
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, sfx);
+    })(t0);
+    co.unobserve(el);
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('[data-target]').forEach(el => co.observe(el));
+
+/* ── Marquee duplicate ── */
+(function() {
+  const track = document.getElementById('marqueeTrack');
+  const clone = track.innerHTML;
+  track.innerHTML = clone + clone; // seamless loop
+})();
+
+/* ── Star canvas ── */
+(function() {
+  const canvas = document.getElementById('starCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
   }
-  const co = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, target = +el.dataset.target, sfx = el.dataset.suffix||'', t0 = performance.now();
-      const ease = p => 1 - Math.pow(1-p, 3);
-      (function tick(now) {
-        const p = Math.min((now-t0)/1800, 1);
-        el.textContent = fmt(Math.round(ease(p)*target), sfx);
-        if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, sfx);
-      })(t0);
-      co.unobserve(el);
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  for (let i = 0; i < 120; i++) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.1 + 0.2,
+      a: Math.random(),
+      speed: 0.3 + Math.random() * 0.7,
+      dir: Math.random() > .5 ? 1 : -1
     });
-  }, {threshold: 0.5});
-  document.querySelectorAll('[data-target]').forEach(el => co.observe(el));
+  }
+
+  let raf;
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(s => {
+      s.a += s.dir * s.speed * 0.004;
+      if (s.a > 1 || s.a < 0) s.dir *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.a * 0.6})`;
+      ctx.fill();
+    });
+    raf = requestAnimationFrame(draw);
+  }
+  draw(0);
+
+  // Stop when hero scrolls out
+  const heroEl = document.getElementById('home');
+  const stopObs = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) cancelAnimationFrame(raf);
+    else raf = requestAnimationFrame(draw);
+  }, {threshold: 0});
+  stopObs.observe(heroEl);
+})();
 </script>
 </body>
 </html>
