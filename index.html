@@ -8,8 +8,8 @@
   <meta property="og:description" content="Open-source WordPress plugins for related posts, popular posts, search, knowledge base & more. Free and actively maintained.">
   <meta property="og:image" content="WebberZone Logo.png">
   <title>WebberZone on GitHub</title>
-  <!-- Favicon: WebberZone W in brand blue -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23032075'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' font-weight='900' fill='%23FFBD59' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+  <!-- Favicon from webberzone.com -->
+  <link rel="icon" type="image/png" href="https://webberzone.com/wp-content/uploads/2023/12/cropped-WZ-Only-dark-bg.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
@@ -540,6 +540,63 @@
   }
 
   /* ══════════════════════════════════════
+     PREMIUM
+  ══════════════════════════════════════ */
+  .premium { background: var(--bg-2); border-top: 1px solid var(--bd); }
+  .premium-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 18px;
+    margin-top: 52px;
+  }
+  .pro-card {
+    background: var(--card);
+    border: 1px solid var(--bd);
+    border-top: 2px solid var(--wz-gold);
+    border-radius: var(--r); padding: 28px 24px;
+    display: flex; flex-direction: column;
+    transition: all .3s cubic-bezier(.22,1,.36,1);
+    position: relative; overflow: hidden;
+    text-decoration: none;
+  }
+  .pro-card::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(ellipse at top center, rgba(255,189,89,.06), transparent 60%);
+    pointer-events: none;
+  }
+  .pro-card:hover {
+    border-color: var(--wz-gold);
+    background: rgba(255,189,89,.05);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 0 1px rgba(255,189,89,.2);
+  }
+  .pro-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: linear-gradient(135deg, var(--wz-gold), var(--amber-2));
+    color: #000; font-size: .65rem; font-weight: 800;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 50px;
+    margin-bottom: 16px; align-self: flex-start;
+  }
+  .pro-icon {
+    font-size: 1.6rem; margin-bottom: 14px;
+  }
+  .pro-name {
+    font-family: var(--fh); font-size: 1rem; font-weight: 700;
+    letter-spacing: -.02em; color: var(--t1); margin-bottom: 10px;
+  }
+  .pro-desc {
+    color: var(--t2); font-size: .845rem; line-height: 1.65; flex: 1;
+  }
+  .pro-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--wz-gold); font-size: .8rem; font-weight: 700;
+    margin-top: 20px; transition: gap .2s;
+  }
+  .pro-card:hover .pro-cta { gap: 10px; }
+  @media(max-width:900px) { .premium-grid { grid-template-columns: repeat(2,1fr); } }
+  @media(max-width:500px)  { .premium-grid { grid-template-columns: 1fr; } }
+
+  /* ══════════════════════════════════════
      ABOUT
   ══════════════════════════════════════ */
   .about { background: var(--bg-2); }
@@ -604,24 +661,12 @@
     background: radial-gradient(ellipse at top right, rgba(79,142,247,.07), transparent 60%);
     pointer-events: none;
   }
-  .avatar-wrap { position: relative; width: 68px; margin-bottom: 20px; }
-  .avatar {
-    width: 68px; height: 68px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--wz-blue), var(--wz-gold));
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--fh); font-size: 1.4rem; font-weight: 800; color: #fff;
-    position: relative; z-index: 1;
+  .avatar-wrap { position: relative; width: 200px; margin-bottom: 24px; }
+  .avatar-img {
+    width: 200px; height: auto; display: block;
+    border-radius: 12px;
   }
-  .avatar-ring {
-    position: absolute; inset: -3px; border-radius: 50%;
-    background: conic-gradient(var(--wz-blue), var(--wz-gold), var(--wz-red), var(--wz-blue));
-    animation: spinRing 4s linear infinite;
-    z-index: 0;
-  }
-  .avatar-ring::before {
-    content: ''; position: absolute; inset: 3px;
-    border-radius: 50%; background: var(--bg-3);
-  }
+  /* keep ring class defined but unused — logo replaces avatar */
   @keyframes spinRing { to { transform: rotate(360deg); } }
 
   .f-name  { font-family:var(--fh); font-size:1.25rem; font-weight:800; letter-spacing:-.03em; margin-bottom:3px; }
@@ -806,6 +851,7 @@
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#plugins">Plugins</a></li>
+    <li><a href="#premium">Pro</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
     <li><a href="https://ajaydsouza.com" target="_blank">Blog</a></li>
@@ -1099,6 +1145,51 @@
   </div>
 </section>
 
+<!-- ══════════ PREMIUM ══════════ -->
+<section class="premium" id="premium">
+  <div class="container">
+    <div class="eyebrow reveal">Go Further</div>
+    <h2 class="section-title reveal">Premium WordPress Plugins</h2>
+    <p class="section-desc reveal">Need more power? Pro versions unlock advanced features, priority support, and extended functionality for the most popular WebberZone plugins.</p>
+
+    <div class="premium-grid">
+
+      <a href="https://webberzone.com/plugins/contextual-related-posts/pro/" target="_blank" rel="noopener" class="pro-card reveal">
+        <span class="pro-badge">⚡ Pro</span>
+        <div class="pro-icon">🔗</div>
+        <div class="pro-name">Contextual Related Posts Pro</div>
+        <p class="pro-desc">Advanced related posts with custom layouts, fine-grained relevance controls, thumbnail options, and priority support.</p>
+        <span class="pro-cta">View Pro →</span>
+      </a>
+
+      <a href="https://webberzone.com/plugins/top-10/pro/" target="_blank" rel="noopener" class="pro-card reveal d1">
+        <span class="pro-badge">⚡ Pro</span>
+        <div class="pro-icon">📊</div>
+        <div class="pro-name">Top 10 Pro</div>
+        <p class="pro-desc">Extended popular posts tracking with more display options, advanced analytics, custom templates, and priority support.</p>
+        <span class="pro-cta">View Pro →</span>
+      </a>
+
+      <a href="https://webberzone.com/plugins/better-search/pro/" target="_blank" rel="noopener" class="pro-card reveal d2">
+        <span class="pro-badge">⚡ Pro</span>
+        <div class="pro-icon">🔍</div>
+        <div class="pro-name">Better Search Pro</div>
+        <p class="pro-desc">Supercharge your WordPress search with additional relevance tuning, custom result templates, and enhanced filtering.</p>
+        <span class="pro-cta">View Pro →</span>
+      </a>
+
+      <a href="https://webberzone.com/plugins/knowledgebase#pro" target="_blank" rel="noopener" class="pro-card reveal d3">
+        <span class="pro-badge">⚡ Pro</span>
+        <div class="pro-icon">📚</div>
+        <div class="pro-name">Knowledge Base Pro</div>
+        <p class="pro-desc">Unlock advanced knowledge base features including role-based access, expanded layouts, and additional customisation options.</p>
+        <span class="pro-cta">View Pro →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ ABOUT ══════════ -->
 <section class="about" id="about">
   <div class="container">
@@ -1170,8 +1261,9 @@
 
       <div class="founder-card reveal d2">
         <div class="avatar-wrap">
-          <div class="avatar-ring"></div>
-          <div class="avatar">AJ</div>
+          <img src="https://ajaydsouza.com/wp-content/uploads/2023/09/AD-Logo-Gold-on-Black-Text-Only.png"
+               alt="Ajay D'Souza" class="avatar-img"
+               loading="lazy">
         </div>
         <div class="f-name">Ajay D'Souza</div>
         <div class="f-role">Core Developer · WebberZone</div>
