@@ -1,3 +1,6 @@
 /.claude
 
 .devin/
+
+# Testing
+/.playwright-mcp
