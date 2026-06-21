@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>WebberZone - Smell Report</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+		.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+		.report-section { border: 1px solid #222226; background: #0a0a0b; position: relative; }
+		.corner-box { position: absolute; width: 20px; height: 20px; border: 1px solid #222226; background: #000; }
+	</style>
+</head>
+<body class="bg-black text-[#fafafa]">
+	<main class="mx-auto w-full max-w-6xl px-5 py-8 md:px-10 md:py-12">
+		<header class="report-section mb-8 p-6 md:p-8">
+			<div class="corner-box left-0 top-0 -translate-x-1/2 -translate-y-1/2"></div>
+			<div class="corner-box right-0 top-0 translate-x-1/2 -translate-y-1/2"></div>
+			<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+				<div>
+					<div class="mono mb-2 text-xs tracking-widest text-[#666]">// SMELL</div>
+					<h1 class="text-4xl font-bold tracking-tight md:text-6xl">WebberZone</h1>
+				</div>
+				<div class="mono text-left text-xs text-[#666] md:text-right">
+					<div>COMMANDCODE REPORT</div>
+					<div class="text-[#444]">2026-06-20</div>
+				</div>
+			</div>
+		</header>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="corner-box left-0 top-0 -translate-x-1/2 -translate-y-1/2"></div>
+			<div class="corner-box right-0 top-0 translate-x-1/2 -translate-y-1/2"></div>
+			<div class="grid gap-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+				<div>
+					<div class="mono mb-2 text-xs tracking-widest text-[#666]">// OVERALL</div>
+					<div class="text-6xl font-bold tracking-tight md:text-7xl">2</div>
+					<div class="mt-1 text-lg text-[#666]">/ 10</div>
+					<div class="mt-4 inline-flex border border-[#ef4444]/30 bg-[#ef4444]/10 px-3 py-1 text-sm text-[#ef4444]">IDENTITY FAILURE</div>
+				</div>
+				<div>
+					<div class="mono mb-3 text-xs tracking-widest text-[#666]">// TL;DR</div>
+					<p class="text-sm leading-6 text-[#a0a0a0]">The page is functionally solid but visually generic. Dark theme, blue accent, centered hero, feature tile grid — every choice could belong to any developer tool. Nothing signals "WordPress plugins by a 20-year veteran." The new brand system provides the specific identity this page lacks.</p>
+					<p class="mt-4 text-sm leading-6 text-[#fbbf24]">Apply full redesign with brand system: teal/rust/navy palette, League Spartan + Plus Jakarta Sans, proper SVG logos, light theme.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// HEURISTIC SCORES</div>
+			<div class="overflow-x-auto">
+				<table class="w-full min-w-[720px] border-collapse text-sm">
+					<thead>
+						<tr class="border-b border-[#222226] text-left mono text-xs text-[#666]">
+							<th class="py-3 pr-4 font-normal">#</th>
+							<th class="py-3 pr-4 font-normal">ODOR</th>
+							<th class="py-3 pr-4 font-normal">STATUS</th>
+							<th class="py-3 font-normal">SEVERITY</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">1</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Tech Gradient</td>
+							<td class="py-4 pr-4 text-[#ef4444]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">STRONG — blue-violet gradient hero text</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">2</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Generic Tech Hue</td>
+							<td class="py-4 pr-4 text-[#ef4444]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">STRONG — navy blue as primary</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">3</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Feature Tile Grid</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">MODERATE — uniform plugin cards</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">4</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Accent Rail</td>
+							<td class="py-4 pr-4 text-[#34d399]">CLEAN</td>
+							<td class="py-4 text-[#a0a0a0]">Not present</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">5</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Unearned Blur</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">WEAK — backdrop-filter on hero chips</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">6</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Stat Monument</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">MODERATE — oversized gradient numbers</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">7</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Icon Topper</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">WEAK — icons above stat numbers</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">8</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Bounce Everywhere</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">MODERATE — orbs, chips, shimmer, scroll bar</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">9</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Default Type</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">WEAK — Syne + DM Sans, no brand connection</td>
+						</tr>
+						<tr class="border-b border-[#1a1a1e]">
+							<td class="py-4 pr-4 text-[#555]">10</td>
+							<td class="py-4 pr-4 text-[#fafafa]">Center Stack</td>
+							<td class="py-4 pr-4 text-[#fbbf24]">DETECTED</td>
+							<td class="py-4 text-[#a0a0a0]">MODERATE — hero, stats, CTA all centered</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// DOMAIN DEFAULT TRAP</div>
+			<p class="text-sm leading-6 text-[#a0a0a0]">Dark background + blue accent + grid cards + centered hero + tech font. Fits every developer tool landing page. Nothing signals WordPress, plugins, or Ajay D'Souza's 20-year history. The new brand palette (teal/rust) is an unexpected and earned departure from the blue-tech default.</p>
+		</section>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// WHAT'S WORKING</div>
+			<div class="grid gap-4 md:grid-cols-3">
+				<article class="border border-[#1f1f24] p-4">
+					<h2 class="mb-2 text-sm font-semibold">Functional Layout</h2>
+					<p class="text-sm leading-6 text-[#a0a0a0]">Page sections are logically ordered. Navigation works. Content is well-organized.</p>
+				</article>
+				<article class="border border-[#1f1f24] p-4">
+					<h2 class="mb-2 text-sm font-semibold">Responsive Behavior</h2>
+					<p class="text-sm leading-6 text-[#a0a0a0]">Three breakpoints, grid adapts, hamburger nav on mobile, clamp() font sizing.</p>
+				</article>
+				<article class="border border-[#1f1f24] p-4">
+					<h2 class="mb-2 text-sm font-semibold">Rich Content</h2>
+					<p class="text-sm leading-6 text-[#a0a0a0]">Complete plugin listings, timeline history, founder section, stats, and calls to action.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="report-section p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// NEXT MODES</div>
+			<div class="flex flex-wrap gap-2">
+				<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/redesign</span>
+				<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/deslop</span>
+				<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/recolor</span>
+				<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/typeset</span>
+				<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/voice</span>
+			</div>
+		</section>
+
+		<footer class="mono py-8 text-center text-xs tracking-widest text-[#444]">
+			Generated with CommandCode — 2026-06-20
+		</footer>
+	</main>
+</body>
+</html>
