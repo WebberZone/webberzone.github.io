@@ -491,6 +491,38 @@
   }
   .retired-note a { color: var(--wz-teal-text); }
   .retired-card .card-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .archive-hd {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin: 48px 0 20px; flex-wrap: wrap; gap: 8px;
+  }
+  .archive-hd h3 {
+    font-family: 'League Spartan', system-ui, sans-serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--wz-navy);
+  }
+  .archive-hd span {
+    font-size: .8rem; color: var(--wz-warm-grey);
+  }
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .archive-item {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    background: var(--wz-off-white);
+    border: 1px solid var(--wz-card-border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .archive-item-name {
+    font-size: .85rem; font-weight: 700; color: var(--wz-navy);
+  }
+  .archive-item-desc {
+    display: block;
+    font-size: .76rem; font-weight: 400; color: var(--wz-warm-grey);
+    margin-top: 2px;
+  }
+  .archive-item a.repo-link { font-size: .76rem; flex-shrink: 0; }
 
   /* ══════════════════════════════════════
      PREMIUM
@@ -847,6 +879,7 @@
   ══════════════════════════════════════ */
   @media(max-width:1024px) {
     .plugins-grid { grid-template-columns: repeat(2,1fr); }
+    .archive-grid { grid-template-columns: repeat(2,1fr); }
     .gh-box { padding: 56px 40px; }
   }
   @media(max-width:900px) {
@@ -879,6 +912,7 @@
     section { padding: 64px 24px; }
     .plugins-grid { grid-template-columns: 1fr; }
     .retired-grid { grid-template-columns: 1fr; }
+    .archive-grid { grid-template-columns: 1fr; }
     .premium-grid { grid-template-columns: repeat(2,1fr); }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .founder-card { padding: 28px; }
@@ -972,7 +1006,7 @@
     <div class="hero-proof">
       <div class="hero-stat-grid">
         <div class="hero-stat">
-          <div class="hero-stat-num" data-target="100000" data-suffix="+">&nbsp;</div>
+          <div class="hero-stat-num" data-target="60000" data-suffix="+">&nbsp;</div>
           <div class="hero-stat-lbl">Active WordPress Sites</div>
         </div>
         <div class="hero-stat">
@@ -1172,6 +1206,80 @@
       </div>
 
     </div>
+
+    <div class="archive-hd reveal">
+      <h3>The Archive — 20 Years of Side Projects</h3>
+      <span>Older plugins and tools, since folded into other products, superseded, or simply retired</span>
+    </div>
+
+    <div class="archive-grid">
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Top 10 — Fast Tracker<span class="archive-item-desc">Async page-view tracker add-on for Top 10, since merged into core</span></span>
+        <a href="https://github.com/WebberZone/top-10-fast-tracker" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">CRP Taxonomy Tools<span class="archive-item-desc">Matched Contextual Related Posts by custom taxonomy terms, since merged into core</span></span>
+        <a href="https://github.com/WebberZone/crp-taxonomy" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Add to Footer<span class="archive-item-desc">Inserted custom content at the end of every post</span></span>
+        <a href="https://github.com/ajaydsouza/add-to-footer" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Add to Feed<span class="archive-item-desc">Added custom content to RSS/Atom feed items</span></span>
+        <a href="https://github.com/ajaydsouza/add-to-feed" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Twitter Counter<span class="archive-item-desc">Widget displaying a live Twitter follower count</span></span>
+        <a href="https://github.com/ajaydsouza/twittercounter" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Moderation — Notify Author<span class="archive-item-desc">Notified post authors when a comment was held for moderation</span></span>
+        <a href="https://github.com/ajaydsouza/moderation-notify-author" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">TimThumb<span class="archive-item-desc">PHP script for cropping, zooming, and resizing images — widely used across early WordPress themes</span></span>
+        <a href="https://github.com/ajaydsouza/timthumb" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Connections Reloaded<span class="archive-item-desc">WordPress theme built for the Connections Business Directory plugin</span></span>
+        <a href="https://github.com/ajaydsouza/connections-reloaded" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">WP Niceforms<span class="archive-item-desc">jQuery-powered contact form styling plugin</span></span>
+        <a href="https://github.com/ajaydsouza/wp-niceforms" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Greybox Integrator<span class="archive-item-desc">Integrated the GreyBox lightbox/modal script into WordPress</span></span>
+        <a href="https://github.com/ajaydsouza/greybox-integrator" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Transpose Email<span class="archive-item-desc">Obfuscated email addresses on a page to foil spam bots</span></span>
+        <a href="https://github.com/ajaydsouza/ald-transpose-email" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Open Picture Window<span class="archive-item-desc">Opened linked images in a popup window</span></span>
+        <a href="https://github.com/ajaydsouza/ald-openimagewindow" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+      <div class="archive-item reveal">
+        <span class="archive-item-name">Open Browser Window<span class="archive-item-desc">Forced links to open in a new browser window</span></span>
+        <a href="https://github.com/ajaydsouza/ald-openbrwindow" target="_blank" class="repo-link">GitHub</a>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1288,7 +1396,7 @@
           </div>
           <div class="tl-item">
             <div class="tl-yr">Today</div>
-            <div class="tl-ti">100,000+ Sites — 2M+ Downloads</div>
+            <div class="tl-ti">60,000+ Sites — 2M+ Downloads</div>
             <div class="tl-de">Free, open-source plugins trusted worldwide — with Pro versions available for Contextual Related Posts, Top 10, Better Search, and Knowledge Base.</div>
           </div>
         </div>
@@ -1356,7 +1464,7 @@
     <div class="footer-top">
       <div class="f-brand">
         <img src="assets/WZ_Wordmark_OnNavy.svg" alt="WebberZone" width="160" height="28">
-        <p>Free, open-source WordPress plugins for user retention and engagement. Trusted by 100,000+ sites since 2005.</p>
+        <p>Free, open-source WordPress plugins for user retention and engagement. Trusted by 60,000+ sites since 2005.</p>
         <div class="f-socials">
           <a href="https://github.com/WebberZone" target="_blank" class="f-soc" aria-label="GitHub">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -1470,7 +1578,7 @@ const navObs = new IntersectionObserver(entries => {
 sections.forEach(s => navObs.observe(s));
 
 /* ── Scroll reveal staggered by grid position ── */
-document.querySelectorAll('.plugins-grid, .retired-grid, .premium-grid').forEach(grid => {
+document.querySelectorAll('.plugins-grid, .retired-grid, .archive-grid, .premium-grid').forEach(grid => {
   grid.querySelectorAll('.reveal').forEach((el, i) => {
     el.style.setProperty('--reveal-delay', i * 60 + 'ms');
     el.style.transitionDelay = i * 60 + 'ms';
