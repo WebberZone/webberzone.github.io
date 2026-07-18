@@ -455,6 +455,44 @@
   }
 
   /* ══════════════════════════════════════
+     RETIRED
+  ══════════════════════════════════════ */
+  .retired { background: var(--wz-white); }
+  .retired-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .retired-card {
+    background: var(--wz-off-white);
+    border: 1px dashed var(--wz-card-border);
+    border-radius: var(--r);
+    padding: 24px;
+  }
+  .retired-card .repo-name { display: flex; align-items: center; gap: 8px; }
+  .retired-badge {
+    display: inline-block;
+    background: rgba(87,83,77,.08);
+    border: 1px solid var(--wz-stone);
+    color: var(--wz-warm-grey);
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 50px;
+  }
+  .retired-card .repo-desc { margin-bottom: 12px; }
+  .retired-note {
+    font-size: .8rem;
+    color: var(--wz-warm-grey);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .retired-note a { color: var(--wz-teal-text); }
+  .retired-card .card-links { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* ══════════════════════════════════════
      PREMIUM
   ══════════════════════════════════════ */
   .premium { background: var(--wz-white); }
@@ -840,6 +878,7 @@
     .hero-stat { padding: 20px 16px; }
     section { padding: 64px 24px; }
     .plugins-grid { grid-template-columns: 1fr; }
+    .retired-grid { grid-template-columns: 1fr; }
     .premium-grid { grid-template-columns: repeat(2,1fr); }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .founder-card { padding: 28px; }
@@ -1054,22 +1093,6 @@
       </div>
 
       <div class="repo-card reveal d5">
-        <div class="repo-icon">👥</div>
-        <div class="repo-name">WebberZone Followed Posts</div>
-        <p class="repo-desc">Show visitors the posts that other users have recently viewed. A social proof-driven way to suggest relevant content and spark curiosity in your readers.</p>
-        <div class="repo-footer">
-          <div class="repo-meta">
-            <span>🍴 1</span>
-            <span>PHP</span>
-          </div>
-          <div class="card-links">
-            <a href="https://webberzone.com/plugins/webberzone-followed-posts/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="repo-card reveal d6">
         <div class="repo-icon">🔒</div>
         <div class="repo-name">Auto Close</div>
         <p class="repo-desc">Automatically close comments, pingbacks, and trackbacks on posts older than a specified age. A simple, effective way to keep comment spam off aging content.</p>
@@ -1100,22 +1123,6 @@
       </div>
 
       <div class="repo-card reveal d8">
-        <div class="repo-icon">✍️</div>
-        <div class="repo-name">Popular Authors</div>
-        <div class="addon-tag">Add-on for Top 10</div>
-        <p class="repo-desc">Show a list of the most popular authors on your site using a widget or shortcode. Ranks authors based on their total view counts recorded by Top 10.</p>
-        <div class="repo-footer">
-          <div class="repo-meta">
-            <span>PHP</span>
-          </div>
-          <div class="card-links">
-            <a href="https://webberzone.com/plugins/popular-authors/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/popular-authors" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="repo-card reveal d9">
         <div class="repo-icon">&lt;/&gt;</div>
         <div class="repo-name">Code Block Highlighting</div>
         <p class="repo-desc">Add Prism.js-powered syntax highlighting to the native Gutenberg Code block with per-block controls, 40 languages, and 21 themes.</p>
@@ -1128,6 +1135,39 @@
             <a href="https://wordpress.org/plugins/webberzone-code-block-highlighting/" target="_blank" class="repo-link">WP.org <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
             <a href="https://github.com/WebberZone/webberzone-code-block-highlighting" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RETIRED ══════════ -->
+<section class="retired" id="retired">
+  <div class="container">
+    <div class="eyebrow reveal">Sunset</div>
+    <h2 class="section-title reveal">Retired Plugins</h2>
+    <p class="section-desc reveal">These plugins have reached end of life — no further updates or security patches will be released. Existing installations will keep working, but we recommend migrating away when convenient.</p>
+
+    <div class="retired-grid">
+
+      <div class="retired-card reveal">
+        <div class="repo-name">👥 WebberZone Followed Posts <span class="retired-badge">Retired</span></div>
+        <p class="repo-desc">Showed visitors the posts that other users had recently viewed. Final release: v3.3.0.</p>
+        <p class="retired-note">Recommended alternatives: <a href="https://webberzone.com/plugins/contextual-related-posts/" target="_blank">Contextual Related Posts</a> or <a href="https://webberzone.com/plugins/top-10/" target="_blank">Top 10</a>.</p>
+        <div class="card-links">
+          <a href="https://webberzone.com/announcements/retiring-webberzone-followed-posts/" target="_blank" class="repo-link">Announcement</a>
+          <a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="retired-card reveal">
+        <div class="repo-name">✍️ Popular Authors <span class="retired-badge">Retired</span></div>
+        <p class="repo-desc">Ranked authors on a site by total view counts recorded by Top 10. Final release: v1.5.0.</p>
+        <p class="retired-note">This functionality is being folded into <a href="https://webberzone.com/plugins/top-10/pro/" target="_blank">Top 10 Pro</a> (v4.4, in development).</p>
+        <div class="card-links">
+          <a href="https://webberzone.com/announcements/retiring-popular-authors/" target="_blank" class="repo-link">Announcement</a>
+          <a href="https://github.com/WebberZone/popular-authors" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
         </div>
       </div>
 
@@ -1346,9 +1386,7 @@
           <li><a href="https://github.com/WebberZone/add-to-all" target="_blank">Snippetz</a></li>
           <li><a href="https://github.com/WebberZone/webberzone-code-block-highlighting" target="_blank">Code Block Highlighting</a></li>
           <li><a href="https://github.com/WebberZone/autoclose" target="_blank">Auto Close</a></li>
-          <li><a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank">Followed Posts</a></li>
           <li><a href="https://github.com/WebberZone/webberzone-link-warnings" target="_blank">Link Warnings</a></li>
-          <li><a href="https://github.com/WebberZone/popular-authors" target="_blank">Popular Authors</a></li>
         </ul>
       </div>
 
@@ -1356,6 +1394,7 @@
         <h4>Links</h4>
         <ul>
           <li><a href="https://github.com/WebberZone" target="_blank">GitHub Org</a></li>
+          <li><a href="#retired">Retired Plugins</a></li>
           <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
           <li><a href="https://ajaydsouza.com" target="_blank">Ajay's Blog</a></li>
           <li><a href="https://profiles.wordpress.org/ajay/" target="_blank">WordPress.org Profile</a></li>
@@ -1431,7 +1470,7 @@ const navObs = new IntersectionObserver(entries => {
 sections.forEach(s => navObs.observe(s));
 
 /* ── Scroll reveal staggered by grid position ── */
-document.querySelectorAll('.plugins-grid, .premium-grid').forEach(grid => {
+document.querySelectorAll('.plugins-grid, .retired-grid, .premium-grid').forEach(grid => {
   grid.querySelectorAll('.reveal').forEach((el, i) => {
     el.style.setProperty('--reveal-delay', i * 60 + 'ms');
     el.style.transitionDelay = i * 60 + 'ms';
