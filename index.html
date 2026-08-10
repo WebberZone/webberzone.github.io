@@ -433,15 +433,16 @@
     font-weight: 500;
   }
   .repo-link {
-    display: inline-flex; align-items: center; gap: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
     color: var(--wz-teal-text);
     text-decoration: none;
-    font-size: .82rem;
-    font-weight: 600;
-    transition: gap .2s;
-    white-space: nowrap;
+    padding: 4px;
+    margin: -4px;
+    border-radius: 6px;
+    transition: color .2s, background-color .2s;
   }
-  .repo-link:hover { gap: 8px; color: var(--wz-teal-dark); }
+  .repo-link:hover { color: var(--wz-teal-dark); background-color: rgba(74,124,138,.1); }
+  .card-links { display: flex; align-items: center; gap: 10px; }
   .addon-tag {
     display: inline-block;
     background: rgba(87,83,77,.06);
@@ -1053,8 +1054,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/contextual-related-posts/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/contextual-related-posts" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/contextual-related-posts/" target="_blank" rel="noopener" class="repo-link" aria-label="Contextual Related Posts on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/contextual-related-posts/" target="_blank" rel="noopener" class="repo-link" aria-label="Contextual Related Posts on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/contextual-related-posts" target="_blank" rel="noopener" class="repo-link" aria-label="Contextual Related Posts on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1070,8 +1072,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/top-10/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/top-10" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/top-10/" target="_blank" rel="noopener" class="repo-link" aria-label="Top 10 on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/top-10/" target="_blank" rel="noopener" class="repo-link" aria-label="Top 10 on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/top-10" target="_blank" rel="noopener" class="repo-link" aria-label="Top 10 on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1087,8 +1090,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/better-search/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/better-search" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/better-search/" target="_blank" rel="noopener" class="repo-link" aria-label="Better Search on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/better-search/" target="_blank" rel="noopener" class="repo-link" aria-label="Better Search on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/better-search" target="_blank" rel="noopener" class="repo-link" aria-label="Better Search on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1104,8 +1108,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/knowledgebase/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/knowledgebase" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/knowledgebase/" target="_blank" rel="noopener" class="repo-link" aria-label="Knowledge Base on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/knowledgebase/" target="_blank" rel="noopener" class="repo-link" aria-label="Knowledge Base on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/knowledgebase" target="_blank" rel="noopener" class="repo-link" aria-label="Knowledge Base on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1120,8 +1125,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/add-to-all/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/add-to-all" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/add-to-all/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Snippetz on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/add-to-all/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Snippetz on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/add-to-all" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Snippetz on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1135,8 +1141,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/autoclose/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/autoclose" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/autoclose/" target="_blank" rel="noopener" class="repo-link" aria-label="Auto Close on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/autoclose/" target="_blank" rel="noopener" class="repo-link" aria-label="Auto Close on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/autoclose" target="_blank" rel="noopener" class="repo-link" aria-label="Auto Close on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1150,8 +1157,9 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/webberzone-link-warnings/" target="_blank" class="repo-link">Info</a>
-            <a href="https://github.com/WebberZone/webberzone-link-warnings" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/webberzone-link-warnings/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Link Warnings on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/webberzone-link-warnings/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Link Warnings on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/webberzone-link-warnings" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Link Warnings on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1165,9 +1173,24 @@
             <span>PHP</span>
           </div>
           <div class="card-links">
-            <a href="https://webberzone.com/plugins/webberzone-code-block-highlighting/" target="_blank" class="repo-link">Info</a>
-            <a href="https://wordpress.org/plugins/webberzone-code-block-highlighting/" target="_blank" class="repo-link">WP.org <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
-            <a href="https://github.com/WebberZone/webberzone-code-block-highlighting" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <a href="https://webberzone.com/plugins/webberzone-code-block-highlighting/" target="_blank" rel="noopener" class="repo-link" aria-label="Code Block Highlighting on WebberZone.com (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://wordpress.org/plugins/webberzone-code-block-highlighting/" target="_blank" rel="noopener" class="repo-link" aria-label="Code Block Highlighting on WordPress.org (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg></a>
+            <a href="https://github.com/WebberZone/webberzone-code-block-highlighting" target="_blank" rel="noopener" class="repo-link" aria-label="Code Block Highlighting on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="repo-card reveal d9">
+        <div class="repo-icon">🖼️</div>
+        <div class="repo-name">WebberZone Image Optimizer</div>
+        <p class="repo-desc">Convert your media library to WebP and AVIF, and serve the best format each browser supports. Free, open source, no account, no upload limits.</p>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>PHP</span>
+          </div>
+          <div class="card-links">
+            <a href="https://webberzone.github.io/webberzone-image-optimizer/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Image Optimizer plugin homepage (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://github.com/WebberZone/webberzone-image-optimizer" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Image Optimizer on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1236,7 +1259,7 @@
         <p class="retired-note">Recommended alternatives: <a href="https://webberzone.com/plugins/contextual-related-posts/" target="_blank">Contextual Related Posts</a> or <a href="https://webberzone.com/plugins/top-10/" target="_blank">Top 10</a>.</p>
         <div class="card-links">
           <a href="https://webberzone.com/announcements/retiring-webberzone-followed-posts/" target="_blank" class="repo-link">Announcement</a>
-          <a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+          <a href="https://github.com/WebberZone/where-did-they-go-from-here" target="_blank" class="repo-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
         </div>
       </div>
 
@@ -1246,7 +1269,7 @@
         <p class="retired-note">This functionality is being folded into <a href="https://webberzone.com/plugins/top-10/pro/" target="_blank">Top 10 Pro</a> (v4.4, in development).</p>
         <div class="card-links">
           <a href="https://webberzone.com/announcements/retiring-popular-authors/" target="_blank" class="repo-link">Announcement</a>
-          <a href="https://github.com/WebberZone/popular-authors" target="_blank" class="repo-link">GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+          <a href="https://github.com/WebberZone/popular-authors" target="_blank" class="repo-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
         </div>
       </div>
 
@@ -1404,7 +1427,7 @@
 
       <div class="founder-card reveal d2">
         <div class="avatar-wrap">
-          <img src="https://ajaydsouza.com/wp-content/uploads/2025/05/The-sea-behind-me-at-Pentire-Point.jpg" alt="Ajay D'Souza" class="avatar-img" loading="lazy">
+          <img src="assets/ajay-dsouza-avatar.jpg" alt="Ajay D'Souza" class="avatar-img" loading="lazy">
         </div>
         <div class="f-name">Ajay D'Souza</div>
         <div class="f-role">Core Developer — WebberZone</div>
@@ -1466,14 +1489,14 @@
         <img src="assets/WZ_Wordmark_OnNavy.svg" alt="WebberZone" width="160" height="28">
         <p>Free, open-source WordPress plugins for user retention and engagement. Trusted by 60,000+ sites since 2005.</p>
         <div class="f-socials">
-          <a href="https://github.com/WebberZone" target="_blank" class="f-soc" aria-label="GitHub">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <a href="https://github.com/WebberZone" target="_blank" rel="noopener" class="f-soc" aria-label="GitHub (opens in a new tab)">
+            <svg width="15" height="15" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg>
           </a>
-          <a href="https://profiles.wordpress.org/ajay/" target="_blank" class="f-soc" aria-label="WordPress.org">
-            <svg width="15" height="15" viewBox="0 0 96.24 96.24" xml:space="preserve" fill="currentColor"><path d="M48.122 0C21.587 0 .001 21.585.001 48.118c0 26.535 21.587 48.122 48.12 48.122s48.117-21.587 48.117-48.122C96.239 21.586 74.654 0 48.122 0M4.857 48.118a43.1 43.1 0 0 1 3.746-17.606l20.638 56.544C14.81 80.042 4.857 65.243 4.857 48.118m43.265 43.267c-4.247 0-8.346-.623-12.222-1.763l12.98-37.719 13.301 36.433c.086.215.191.411.308.596a43.2 43.2 0 0 1-14.367 2.453m5.961-63.551c2.604-.137 4.953-.412 4.953-.412 2.33-.276 2.057-3.701-.277-3.564 0 0-7.007.549-11.532.549-4.25 0-11.396-.549-11.396-.549-2.332-.137-2.604 3.427-.273 3.564 0 0 2.208.275 4.537.412l6.74 18.469-9.468 28.395-15.752-46.863c2.608-.136 4.952-.412 4.952-.412 2.33-.275 2.055-3.702-.278-3.562 0 0-7.004.549-11.53.549a95 95 0 0 1-2.784-.052C19.709 12.611 33.008 4.856 48.122 4.856c11.265 0 21.519 4.306 29.215 11.357-.187-.01-.368-.035-.562-.035-4.248 0-7.264 3.702-7.264 7.679 0 3.564 2.055 6.582 4.248 10.146 1.647 2.882 3.567 6.585 3.567 11.932 0 3.704-1.422 8-3.293 13.986l-4.315 14.421zm15.788 57.682 13.215-38.208c2.471-6.171 3.29-11.106 3.29-15.497 0-1.591-.104-3.07-.292-4.449a43 43 0 0 1 5.301 20.758c-.001 15.96-8.653 29.896-21.514 37.396"/></svg>
+          <a href="https://profiles.wordpress.org/ajay/" target="_blank" rel="noopener" class="f-soc" aria-label="WordPress.org (opens in a new tab)">
+            <svg width="15" height="15" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-wordpress"></use></svg>
           </a>
-          <a href="https://webberzone.com" target="_blank" class="f-soc" aria-label="WebberZone.com">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <a href="https://webberzone.com" target="_blank" rel="noopener" class="f-soc" aria-label="WebberZone.com (opens in a new tab)">
+            <svg width="20" height="20" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg>
           </a>
         </div>
       </div>
