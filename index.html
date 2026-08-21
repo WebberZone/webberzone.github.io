@@ -443,6 +443,75 @@
   }
   .repo-link:hover { color: var(--wz-teal-dark); background-color: rgba(74,124,138,.1); }
   .card-links { display: flex; align-items: center; gap: 10px; }
+  .agent-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    padding: 24px 28px;
+    background: var(--wz-white);
+    border: 1px solid var(--wz-card-border);
+    border-radius: var(--r);
+    box-shadow: 0 1px 4px var(--wz-card-shadow);
+  }
+  .agent-strip-copy { flex: 1 1 460px; min-width: 0; }
+  .agent-strip h3 {
+    font-family: 'League Spartan', system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--wz-navy);
+    margin-bottom: 6px;
+    letter-spacing: -.01em;
+  }
+  .agent-strip p {
+    color: var(--wz-warm-grey);
+    font-size: .85rem;
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+  .agent-strip-prompt {
+    display: block;
+    padding: 12px 14px;
+    background: rgba(74,124,138,.05);
+    border: 1px solid var(--wz-stone);
+    border-radius: 8px;
+    color: var(--wz-teal-text);
+    font-family: 'Fira Code', ui-monospace, monospace;
+    font-size: .74rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+  .agent-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    flex-shrink: 0;
+    padding: 11px 20px;
+    border: 1px solid var(--wz-teal);
+    border-radius: 999px;
+    background: var(--wz-white);
+    color: var(--wz-teal-text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background-color .2s, color .2s, box-shadow .2s;
+  }
+  .agent-pill:hover {
+    background: var(--wz-teal);
+    color: var(--wz-white);
+    box-shadow: 0 4px 14px rgba(26,46,58,.12);
+  }
+  .agent-pill:focus-visible { outline: 3px solid rgba(74,124,138,.4); outline-offset: 2px; }
+  .agent-pill svg { flex: none; }
+  .agent-pill .agent-pill-check { display: none; }
+  .agent-pill.is-copied { background: var(--wz-teal); color: var(--wz-white); }
+  .agent-pill.is-copied .agent-pill-copy { display: none; }
+  .agent-pill.is-copied .agent-pill-check { display: block; }
+
   .addon-tag {
     display: inline-block;
     background: rgba(87,83,77,.06);
@@ -936,6 +1005,8 @@
     .gh-box h2 { font-size: clamp(1.3rem, 5vw, 1.6rem); }
     .section-title { font-size: clamp(1.4rem, 5.5vw, 1.8rem); }
     .repo-card { padding: 20px; }
+    .agent-strip { padding: 20px; gap: 18px; }
+    .agent-pill { width: 100%; justify-content: center; }
     .pro-card { padding: 24px 20px; }
     .footer-bot { flex-direction: column; text-align: center; }
   }
@@ -968,6 +1039,7 @@
   </a>
   <ul class="nav-links" id="navLinks" role="list">
     <li><a href="#plugins">Plugins</a></li>
+    <li><a href="#developers">Developers</a></li>
     <li><a href="#premium">Pro</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
@@ -1227,6 +1299,51 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DEVELOPERS ══════════ -->
+<section class="plugins" id="developers">
+  <div class="container">
+    <div class="plugins-hd">
+      <div>
+        <div class="eyebrow reveal">For Developers</div>
+        <h2 class="section-title reveal">Developer Libraries</h2>
+        <p class="section-desc reveal">The building blocks behind WebberZone plugins, released for anyone to use in their own. Copy them in, rename the namespace, and ship.</p>
+      </div>
+    </div>
+
+    <div class="plugins-grid">
+
+      <div class="repo-card reveal">
+        <div class="repo-icon">⚙️</div>
+        <div class="repo-name">WebberZone Settings API</div>
+        <p class="repo-desc">A reusable wrapper around the WordPress Settings API. Declare your fields once as a PHP array and get a tabbed settings page, 26 field types, sanitization, defaults, post metaboxes, and an optional setup wizard. No Composer package, no build step — copy the files into your plugin and own them.</p>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>PHP</span>
+          </div>
+          <div class="card-links">
+            <a href="https://webberzone.github.io/Settings_API/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Settings API documentation (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
+            <a href="https://github.com/WebberZone/Settings_API" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Settings API on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="agent-strip reveal">
+      <div class="agent-strip-copy">
+        <h3>Let your coding agent wire it up</h3>
+        <p>Copy this prompt into Claude Code, Codex, or Cursor from inside your plugin directory, and it will fetch the setup instructions and do the integration.</p>
+        <code class="agent-strip-prompt">Fetch and execute the appropriate instructions to set up the WebberZone Settings API in my plugin from https://webberzone.github.io/Settings_API/prompt.md</code>
+      </div>
+      <button type="button" class="agent-pill" data-agent-prompt="Fetch and execute the appropriate instructions to set up the WebberZone Settings API in my plugin from https://webberzone.github.io/Settings_API/prompt.md">
+        <span class="agent-pill-label">Copy setup prompt</span>
+        <svg class="agent-pill-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <svg class="agent-pill-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -1557,6 +1674,7 @@
         <h4>Links</h4>
         <ul>
           <li><a href="https://github.com/WebberZone" target="_blank">GitHub Org</a></li>
+          <li><a href="https://webberzone.github.io/Settings_API/" target="_blank">Settings API Docs</a></li>
           <li><a href="#retired">Retired Plugins</a></li>
           <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
           <li><a href="https://ajaydsouza.com" target="_blank">Ajay's Blog</a></li>
@@ -1643,6 +1761,44 @@ const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
 }, {threshold: 0.08});
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── Copy the agent setup prompt ── */
+document.querySelectorAll('.agent-pill').forEach(pill => {
+  const label = pill.querySelector('.agent-pill-label');
+  const original = label.textContent;
+  const text = pill.getAttribute('data-agent-prompt');
+  let timer;
+
+  const done = () => {
+    label.textContent = 'Copied';
+    pill.classList.add('is-copied');
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      label.textContent = original;
+      pill.classList.remove('is-copied');
+    }, 2600);
+  };
+
+  const fallback = () => {
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.appendChild(field);
+    field.select();
+    try { document.execCommand('copy'); done(); } catch (e) { window.prompt('Copy this prompt:', text); }
+    document.body.removeChild(field);
+  };
+
+  pill.addEventListener('click', () => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else {
+      fallback();
+    }
+  });
+});
 
 /* ── Animated counters ── */
 function fmt(n, sfx) {
