@@ -436,6 +436,8 @@
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--wz-teal-text);
     text-decoration: none;
+    font-size: .82rem;
+    font-weight: 600;
     padding: 4px;
     margin: -4px;
     border-radius: 6px;
@@ -445,11 +447,12 @@
   .card-links { display: flex; align-items: center; gap: 10px; }
   .dev-grid {
     display: grid;
-    grid-template-columns: 1fr 1.35fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     gap: 20px;
   }
   .agent-strip {
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -954,6 +957,7 @@
      RESPONSIVE
   ══════════════════════════════════════ */
   @media(max-width:1024px) {
+    .nav-links { gap: 16px; }
     .plugins-grid { grid-template-columns: repeat(2,1fr); }
     .dev-grid { grid-template-columns: 1fr 1fr; }
     .archive-grid { grid-template-columns: repeat(2,1fr); }
@@ -1049,6 +1053,7 @@
     <li><a href="#plugins">Plugins</a></li>
     <li><a href="#premium">Pro</a></li>
     <li><a href="#developers">Developers</a></li>
+    <li><a href="https://webberzone.github.io/code-library/" target="_blank" rel="noopener">Code Library</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
     <li><a href="https://ajaydsouza.com" target="_blank">Blog</a></li>
@@ -1364,7 +1369,7 @@
       <div>
         <div class="eyebrow reveal">For Developers</div>
         <h2 class="section-title reveal">Developer Libraries</h2>
-        <p class="section-desc reveal">The building blocks behind WebberZone plugins, released for anyone to use in their own. Copy them in, rename the namespace, and ship.</p>
+        <p class="section-desc reveal">Explore reusable PHP tools and practical snippets for building and customizing WebberZone plugins.</p>
       </div>
     </div>
 
@@ -1381,6 +1386,21 @@
           <div class="card-links">
             <a href="https://webberzone.github.io/Settings_API/" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Settings API documentation (opens in a new tab)"><svg class="link-icon" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-webberzone"></use></svg></a>
             <a href="https://github.com/WebberZone/Settings_API" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Settings API on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="repo-card reveal d1">
+        <div class="repo-icon">📚</div>
+        <div class="repo-name">WebberZone Code Library</div>
+        <p class="repo-desc">Search practical PHP snippets for Better Search, Contextual Related Posts, and Top 10. Each entry includes placement, requirements, review status, and installation notes.</p>
+        <div class="repo-footer">
+          <div class="repo-meta">
+            <span>PHP snippets</span>
+          </div>
+          <div class="card-links">
+            <a href="https://webberzone.github.io/code-library/" target="_blank" rel="noopener" class="repo-link">Browse snippets ↗</a>
+            <a href="https://github.com/WebberZone/code-library" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Code Library on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
           </div>
         </div>
       </div>
@@ -1683,6 +1703,7 @@
         <ul>
           <li><a href="https://github.com/WebberZone" target="_blank">GitHub Org</a></li>
           <li><a href="https://webberzone.github.io/Settings_API/" target="_blank">Settings API Docs</a></li>
+          <li><a href="https://webberzone.github.io/code-library/" target="_blank" rel="noopener">Code Library</a></li>
           <li><a href="#retired">Retired Plugins</a></li>
           <li><a href="https://webberzone.com" target="_blank">WebberZone.com</a></li>
           <li><a href="https://ajaydsouza.com" target="_blank">Ajay's Blog</a></li>
