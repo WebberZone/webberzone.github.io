@@ -436,8 +436,6 @@
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--wz-teal-text);
     text-decoration: none;
-    font-size: .82rem;
-    font-weight: 600;
     padding: 4px;
     margin: -4px;
     border-radius: 6px;
@@ -447,12 +445,20 @@
   .card-links { display: flex; align-items: center; gap: 10px; }
   .dev-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr 1.35fr;
     align-items: stretch;
     gap: 20px;
   }
+  .library-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+  }
+  .library-card .repo-icon { margin: 0; }
+  .library-card .repo-name { font-size: 1.25rem; }
+  .library-card .repo-desc { max-width: 720px; }
   .agent-strip {
-    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -993,6 +999,8 @@
     section { padding: 64px 24px; }
     .plugins-grid { grid-template-columns: 1fr; }
     .dev-grid { grid-template-columns: 1fr; }
+    .library-card { grid-template-columns: auto minmax(0, 1fr); }
+    .library-card .btn-primary { grid-column: 2; justify-self: start; }
     .retired-grid { grid-template-columns: 1fr; }
     .archive-grid { grid-template-columns: 1fr; }
     .premium-grid { grid-template-columns: repeat(2,1fr); }
@@ -1011,6 +1019,8 @@
     .hero-stat:nth-child(3),
     .hero-stat:nth-child(4) { border-top: 1px solid var(--wz-stone); }
     .premium-grid { grid-template-columns: 1fr; }
+    .library-card { grid-template-columns: 1fr; }
+    .library-card .btn-primary { grid-column: auto; }
     .footer-top { grid-template-columns: 1fr; }
     .hero-ctas, .gh-btns { flex-direction: column; align-items: stretch; }
     .hero-ctas a, .gh-btns a { text-align: center; justify-content: center; }
@@ -1369,7 +1379,7 @@
       <div>
         <div class="eyebrow reveal">For Developers</div>
         <h2 class="section-title reveal">Developer Libraries</h2>
-        <p class="section-desc reveal">Explore reusable PHP tools and practical snippets for building and customizing WebberZone plugins.</p>
+        <p class="section-desc reveal">The building blocks behind WebberZone plugins, released for anyone to use in their own. Copy them in, rename the namespace, and ship.</p>
       </div>
     </div>
 
@@ -1390,21 +1400,6 @@
         </div>
       </div>
 
-      <div class="repo-card reveal d1">
-        <div class="repo-icon">📚</div>
-        <div class="repo-name">WebberZone Code Library</div>
-        <p class="repo-desc">Search practical PHP snippets for Better Search, Contextual Related Posts, and Top 10. Each entry includes placement, requirements, review status, and installation notes.</p>
-        <div class="repo-footer">
-          <div class="repo-meta">
-            <span>PHP snippets</span>
-          </div>
-          <div class="card-links">
-            <a href="https://webberzone.github.io/code-library/" target="_blank" rel="noopener" class="repo-link">Browse snippets ↗</a>
-            <a href="https://github.com/WebberZone/code-library" target="_blank" rel="noopener" class="repo-link" aria-label="WebberZone Code Library on GitHub (opens in a new tab)"><svg class="link-icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="assets/icons.svg#icon-github"></use></svg></a>
-          </div>
-        </div>
-      </div>
-
       <div class="agent-strip reveal">
         <h3>Let your coding agent wire it up</h3>
         <p>Copy this prompt into Claude Code, Codex, or Cursor from inside your plugin directory, and it will fetch the setup instructions and do the integration.</p>
@@ -1416,6 +1411,21 @@
         </button>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CODE LIBRARY ══════════ -->
+<section class="plugins" id="code-library">
+  <div class="container">
+    <div class="repo-card reveal library-card">
+      <div class="repo-icon" aria-hidden="true">📚</div>
+      <div>
+        <div class="eyebrow">Customization Snippets</div>
+        <h2 class="repo-name">WebberZone Code Library</h2>
+        <p class="repo-desc">Search practical PHP snippets for Better Search, Contextual Related Posts, and Top 10. Each entry includes placement, requirements, review status, and installation notes.</p>
+      </div>
+      <a href="https://webberzone.github.io/code-library/" target="_blank" rel="noopener" class="btn-primary">Browse snippets ↗</a>
     </div>
   </div>
 </section>
